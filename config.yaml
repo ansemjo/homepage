@@ -1,0 +1,46 @@
+---
+# general settings
+baseURL: https://semjonov.de/
+LanguageCode: en
+theme: hak
+Paginate: 5
+disableKinds:
+  - RSS
+
+
+# building directories
+contentDir: site
+publishDir: dist
+
+
+# url structure
+uglyURLs: true
+permalinks:
+  #post: /:section/:slug
+
+
+# permanent menu links
+# others can be added in post frontmatter
+menu:
+  main:
+    - name: Home
+      weight: 1
+      url: /
+
+
+# miscellaneous site settings
+params:
+  title: 'semjonov.de'
+  author: Anton Semjonov
+  copyright: >
+    Content licensed under
+    [CC-BY-SA-4.0](/license.html)
+
+
+# markdown parser
+blackfriday:
+  smarypants:     true
+  angledQuotes:   true
+  fractions:      true
+
+...
