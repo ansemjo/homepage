@@ -1,7 +1,7 @@
 ---
 title: Freifunk VLAN
 date: 2016-03-01
-draft: true
+draft: false
 toc: true
 categories:
   - blog

@@ -2,7 +2,7 @@
 title: Contact
 date: 2017-10-06T21:27:19+02:00
 description: Short description.
-draft: true
+draft: false
 toc: false
 
 menu: main
