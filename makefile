@@ -3,13 +3,13 @@
 timestamp = date --utc +%FT%H-%M-%S%Z
 tar_options = --create --auto-compress
 
-dist.txz : build
+dist.tar.xz : build
 	tar $(tar_options) \
-		--file dist.txz dist/*
+		--file dist.tar.xz dist/*
 
-dist-timestamp.txz : build
+dist-timestamp.tar.xz : build
 	tar $(tar_options) \
-		--file dist-$$($(timestamp)).txz dist/*
+		--file dist-$$($(timestamp)).tar.xz dist/*
 
 build : clean-dist
 	hugo --ignoreCache
@@ -20,4 +20,4 @@ clean-dist :
 	rm -rf dist/
 
 clean-all : clean-dist
-	rm -rf dist*.txz
+	rm -rf dist*.tar.xz
