@@ -1,2 +1,3 @@
-/dist
-/themes/*
+/dist/
+/dist*.txz
+/themes/
