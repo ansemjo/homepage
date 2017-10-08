@@ -2,7 +2,7 @@
 # general settings
 baseURL: https://semjonov.de/
 LanguageCode: en
-theme: hak
+theme: hackcss
 Paginate: 5
 disableKinds:
   - RSS
