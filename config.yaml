@@ -32,9 +32,7 @@ menu:
 params:
   title: 'semjonov.de'
   author: Anton Semjonov
-  copyright: >
-    Content licensed under
-    [Creative Commons BY-SA 4.0](/license.html).
+  copyright: Content licensed under [Creative Commons BY-SA 4.0](/license.html).
 
 
 # markdown parser
