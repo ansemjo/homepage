@@ -1,17 +1,19 @@
 ---
 title: Truncated IPMI Passwords
+description: webui truncates new passwords to 19 chars
 date: 2017-04-06
+
 draft: false
 toc: false
+
 categories:
   - blog
   - technology
+
 tags:
   - virtual-machines
   - security
 ---
-
-__tl;dr:__ webui truncates new passwords to 19 chars
 
 <!--more-->
 

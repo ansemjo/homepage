@@ -2,6 +2,10 @@
 title: "Disclaimer"
 date: 2017-07-26T21:28:20+02:00
 
+toc: false
+draft: false
+copyright: null
+
 menu: main
 weight: 100
 ---
