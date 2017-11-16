@@ -23,9 +23,19 @@ permalinks:
 # others can be added in post frontmatter
 menu:
   main:
+
     - name: Home
       weight: 1
       url: /
+
+    - name: Tags
+      weight: 2
+      url: /tags.html
+
+    - name: Categories
+      weight: 3
+      url: /categories.html
+
 
 
 # miscellaneous site settings
