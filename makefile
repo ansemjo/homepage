@@ -1,5 +1,5 @@
 # targets that do not correspond to real files
-.PHONY : clean build theme cleandist dist dist.*
+.PHONY : clean build rebuild cleandist dist dist.*
 
 # get most recent commit hash
 COMMIT := $(shell git rev-parse --short  HEAD)
@@ -9,11 +9,13 @@ ARCHIVE  := public-$(COMMIT).tar
 SUFFIXES := xz gz bz2 lz
 ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 
-## build  : use hugo to build the site [default]
-build : theme public/index.html ;
+## build   : use hugo to build the site [default]
+## rebuild : clean and build
+build   : public/index.html ;
+rebuild : clean build ;
 
 # run hugo to build public site
-public/index.html :
+public/index.html : themes/hackcss/LICENSE
 	hugo --ignoreCache
 
 # create compressed archive from built site
@@ -21,21 +23,20 @@ $(ARCHIVES) : public/index.html
 	tar caf "$@" public/*
 
 # aliases for different archives
-## dist   : create a compressed archive of built site
-## dist.% : create a .% compressed archive (gz, xz, bz2, lz)
+## dist    : create a compressed archive of built site
+## dist.%  : create a .% compressed archive (gz, xz, bz2, lz)
 cleandist : clean dist.xz ;
 dist 			: dist.xz ;
 dist.% 		: $(ARCHIVE).% ;
 
-## theme  : checkout theme submodules
-theme : themes/hackcss/LICENSE ;
+# checkout theme submodules
 themes/hackcss/LICENSE :
 	git submodule update --init
 
-## clean  : use git to clean untracked files and folders
+## clean   : use git to clean untracked files and folders
 clean :
 	git clean -dfx
 
-## help   : usage help
+## help    : usage help
 help :
 	@sed -n 's/^##//p' makefile
