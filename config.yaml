@@ -9,7 +9,7 @@ disableKinds:
 
 
 # building directories
-contentDir: site
+contentDir: content
 publishDir: public
 
 
