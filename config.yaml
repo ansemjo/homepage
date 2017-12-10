@@ -10,7 +10,7 @@ disableKinds:
 
 # building directories
 contentDir: site
-publishDir: dist
+publishDir: public
 
 
 # url structure

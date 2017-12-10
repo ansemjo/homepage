@@ -1,4 +1,3 @@
-/dist/
-/dist*.txz
-/dist*.tar.xz
-/themes/
+themes/
+public/
+public-*.tar.*

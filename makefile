@@ -1,23 +1,30 @@
-.PHONY : clean* dist* build
+# targets that do not correspond to real files
+.PHONY : clean build cleandist dist dist.*
 
-timestamp = date --utc +%FT%H-%M-%S%Z
-tar_options = --create --auto-compress
+# get most recent commit hash
+COMMIT := $(shell git rev-parse --short  HEAD)
 
-dist.tar.xz : build
-	tar $(tar_options) \
-		--file dist.tar.xz dist/*
+# construct archive names
+ARCHIVE  := public-$(COMMIT).tar
+SUFFIXES := xz gz bz2 lz
+ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 
-dist-timestamp.tar.xz : build
-	tar $(tar_options) \
-		--file dist-$$($(timestamp)).tar.xz dist/*
+# default
+build : public
 
-build : clean-dist
+# run hugo to build public site
+public :
 	hugo --ignoreCache
 
-clean : clean-all
+# create compressed archive from built site
+$(ARCHIVES) : public
+	tar caf "$@" public/*
 
-clean-dist :
-	rm -rf dist/
+# aliases for different archives
+cleandist : clean dist.xz ;
+dist 			: dist.xz ;
+dist.% 		: $(ARCHIVE).% ;
 
-clean-all : clean-dist
-	rm -rf dist*.tar.xz
+# use git to clean untracked files and folders
+clean :
+	git clean -dfx
