@@ -9,7 +9,7 @@ ARCHIVE  := public-$(COMMIT).tar
 SUFFIXES := xz gz bz2 lz
 ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 
-# default
+## build  : use hugo to build the site [default]
 build : theme public/index.html ;
 
 # run hugo to build public site
@@ -17,19 +17,25 @@ public/index.html :
 	hugo --ignoreCache
 
 # create compressed archive from built site
-$(ARCHIVES) : build
+$(ARCHIVES) : public/index.html
 	tar caf "$@" public/*
 
 # aliases for different archives
+## dist   : create a compressed archive of built site
+## dist.% : create a .% compressed archive (gz, xz, bz2, lz)
 cleandist : clean dist.xz ;
 dist 			: dist.xz ;
 dist.% 		: $(ARCHIVE).% ;
 
-# checkout theme submodule
+## theme  : checkout theme submodules
 theme : themes/hackcss/LICENSE ;
 themes/hackcss/LICENSE :
 	git submodule update --init
 
-# use git to clean untracked files and folders
+## clean  : use git to clean untracked files and folders
 clean :
 	git clean -dfx
+
+## help   : usage help
+help :
+	@sed -n 's/^##//p' makefile
