@@ -20,7 +20,7 @@ public/index.html : themes/hackcss/LICENSE
 
 # create compressed archive from built site
 $(ARCHIVES) : public/index.html
-	tar caf "$@" public/*
+	tar caf "$@" --directory public .
 
 # aliases for different archives
 ## dist    : create a compressed archive of built site
