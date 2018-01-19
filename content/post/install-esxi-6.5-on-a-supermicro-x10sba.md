@@ -74,7 +74,7 @@ Configuration`:
 
 ![](/images/install-esxi-6.5-on-a-supermicro-x10sba/7.png)
 
-I am actually not sure if this is required. But I disabled it and had not
+I am actually not sure if this is required. But I disabled it and had no
 more problems during installation. And since I now had a working serial
 connection I figured: why not?
 
@@ -220,3 +220,17 @@ than a minute in my case).
 ![](/images/install-esxi-6.5-on-a-supermicro-x10sba/5.png)
 
 Voilà!
+
+## Additional Notes
+
+- I am using [this patch tracker] to get commands to update to the latest image
+  profile. Click on the profile to pop up the shell commands.
+
+- Trying to update to the latest profile resulted in an `[Errno 28] No space
+  left on device` error. A user on [reddit] hinted towards swap space: configure
+  a datastore to be used for swap and retry. My SYS-5028D has 64 GB of RAM,
+  hence I just never hit that limit before I guess.
+
+  
+[this patch tracker]: https://esxi-patches.v-front.de/ESXi-6.5.0.html
+[reddit]: https://www.reddit.com/r/vmware/comments/6q4akd/error_trying_to_update_an_esxi_65_host_to_the/dla2qfm/
