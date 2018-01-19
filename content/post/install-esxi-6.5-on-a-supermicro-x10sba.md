@@ -3,7 +3,7 @@ title: Install ESXi 6.5 on a Supermicro X10SBA
 description: Work around problems with the installer by using a serial connection.
 date: 2018-01-19T15:35:43+01:00
 
-draft: true
+draft: false
 toc: true
 
 categories:
