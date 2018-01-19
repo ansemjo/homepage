@@ -32,7 +32,7 @@ power cord, two ethernet cables and done.
 
 The Supermicro X10SBA board does provide a couple of COM ports though and since
 I've never actually used a serial connection for anything before, I've set out
-to try this route to disabling the graphics chip. _(Sidenote: my never server is
+to try this route to disabling the graphics chip. _(Sidenote: my newer server is
 a Supermicro SYS-5028D-T4NT, which has a platform management interface (IPMI).
 Boy, does that make life easier.)_
 
@@ -96,7 +96,7 @@ loaded into memory upon startup.
 
 So you'll probably want to use a 8GB USB stick and make sure it is empty. To
 make sure it is really empty and filled with zeroes (which compress nicely when
-I later create images of said stick) I ran `dd if=/dev/zero of=/dev/sdc
+I later create images of said stick) I ran `dd if=/dev/zero of=/dev/sdX
 status=progress` beforehand. (__Note:__ replace `/dev/sdX` with your actual USB
 stick and make sure you don't delete your running system .. please.)
 
