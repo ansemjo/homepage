@@ -16,8 +16,6 @@ tags:
   - serial-console
 ---
 
-<style> .hack pre code { font-size: 0.9rem; } </style>
-
 Trying to install VMware ESXi on a number of Intel Bay-Trail boards [apparently]
 fails with a hanged installation right after a message like `Relocating modules
 and starting the kernel`. There's multiple [forum posts] around the internet
@@ -59,32 +57,7 @@ should also increase the baud rate to something sensible like 115200 in the
 advanced features of the FTDI chip in your nullmodem cable but these settings
 work great for me:
 
-```
-       Aptio Setup Utility - Copyright (C) 2013 American Megatrends, Inc.
-       Advanced
-/----------------------------------------------------+-------------------------\
-|  COM1                                              |Emulation: ANSI:         |
-|  Console Redirection Settings                      |Extended ASCII char      |
-|                                                    |set. VT100: ASCII char   |
-|  Terminal Type           [VT100+]                  |set. VT100+: Extends     |
-|  Bits per second         [115200]                  |VT100 to support color,  |
-|  Data Bits               [8]                       |function keys, etc.      |
-|  Parity                  [None]                    |VT-UTF8: Uses UTF8       |
-|  Stop Bits               [1]                       |encoding to map Unicode  |
-|  Flow Control            [None]                    |chars onto 1 or more     |
-|  VT-UTF8 Combo Key Sup   [Enabled]                 |-------------------------|
-|  Recorder Mode           [Disabled]                |><: Select Screen        |
-|  Resolution 100x31       [Disabled]                |^v: Select Item          |
-|  Legacy OS Redirection   [80x24]                   |Enter: Select            |
-|  Putty KeyPad            [VT100]                   |+/-: Change Opt.         |
-|  Redirection After BIO   [Always Enable]           |F1: General Help         |
-|                                                    |F2: Previous Values      |
-|                                                    |F3: Optimized Defaults   |
-|                                                    |F4: Save & Exit          |
-|                                                    |ESC: Exit                |
-\----------------------------------------------------+-------------------------/
-Version 2.16.1242. Copyright (C) 2013 American Megatrends, Inc.
-```
+![](/images/install-esxi-6.5-on-a-supermicro-x10sba/6.png)
 
 To connect from my laptop, I use [picocom](https://linux.die.net/man/8/picocom)
 after adding my user to the `uucp` group:
@@ -99,32 +72,7 @@ serial and reach the BIOS Setup and then disable the `Integrated Graphic Device`
 under `Advanced > Chipset Configuration > North Bridge > Graphics
 Configuration`:
 
-```
-       Aptio Setup Utility - Copyright (C) 2013 American Megatrends, Inc.
-          Advanced
-/----------------------------------------------------+-------------------------\
-|  GOP Configuration                                 |Enable : Enable          |
-|  GOP Driver              [Disabled]                |Integrated Graphics      |
-|                                                    |Device (IGD) when        |
-|  Graphics Configuration                            |selected as the Primary  |
-|                                                    |Video Adaptor. Disable:  |
-|  Integrated Graphics D   [Disabled]                |Always disbale IGD       |
-|                                                    |                         |
-|                                                    |                         |
-|                                                    |                         |
-|                                                    |-------------------------|
-|                                                    |><: Select Screen        |
-|                                                    |^v: Select Item          |
-|                                                    |Enter: Select            |
-|                                                    |+/-: Change Opt.         |
-|                                                    |F1: General Help         |
-|                                                    |F2: Previous Values      |
-|                                                    |F3: Optimized Defaults   |
-|                                                    |F4: Save & Exit          |
-|                                                    |ESC: Exit                |
-\----------------------------------------------------+-------------------------/
-        Version 2.16.1242. Copyright (C) 2013 American Megatrends, Inc.
-```
+![](/images/install-esxi-6.5-on-a-supermicro-x10sba/7.png)
 
 I am actually not sure if this is required. But I disabled it and had not
 more problems during installation. And since I now had a working serial
@@ -269,31 +217,6 @@ or legacy BIOS mode anymore either, since you should see output on the serial
 console as soon as the VMKernel starts initializing (which takes a little more
 than a minute in my case).
 
-```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                                                                              │
-│                                                                              │
-│                                                                              │
-│                                                                              │
-│       VMware ESXi 6.5.0 (VMKernel Release Build 4887370)                     │
-│                                                                              │
-│       Supermicro X10SBA                                                      │
-│                                                                              │
-│       Intel(R) Celeron(R) CPU J1900 @ 1.99GHz                                │
-│       15.9 GiB Memory                                                        │
-│                                                                              │
-│                                                                              │
-│       Download tools to manage this host from:                               │
-│       http://<redacted>/                                                     │
-│       http://<redacted>/ (DHCP)                                              │
-│       http://[<redacted>]/ (STATIC)                                          │
-│       http://[<redacted>]/ (AUTOCONF)                                        │
-│       http://[<redacted>]/ (AUTOCONF)                                        │
-│                                                                              │
-│                                                                              │
-│                                                                              │
-│ <F2> Customize System/View Logs                      <F12> Shut Down/Restart │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
+![](/images/install-esxi-6.5-on-a-supermicro-x10sba/5.png)
 
 Voilà!
