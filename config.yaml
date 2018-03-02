@@ -5,6 +5,7 @@ title: semjonov.de
 LanguageCode: en
 theme: hackcss
 Paginate: 5
+enableGitInfo: true
 disableKinds:
   - RSS
 
@@ -43,7 +44,7 @@ menu:
 params:
   title: 'semjonov.de'
   author: Anton Semjonov
-  copyright: Content licensed under [Creative Commons BY-SA 4.0](/license.html).
+  license: "[Creative Commons BY-SA 4.0](/license.html)"
 
 
 # markdown parser
