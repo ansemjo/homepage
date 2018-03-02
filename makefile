@@ -12,7 +12,7 @@ ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 ## build     : use hugo to build the site [default]
 ## rebuild   : clean and build
 build   : public/index.html ;
-rebuild : clean build ;
+rebuild : veryclean build ;
 
 # run hugo to build public site
 public/index.html : themes/hackcss/LICENSE
