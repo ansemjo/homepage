@@ -4,7 +4,7 @@ date: 2017-07-26T21:28:20+02:00
 
 toc: false
 draft: false
-copyright: null
+license: null
 
 menu: main
 weight: 100

@@ -3,14 +3,20 @@ title: License
 date: 2017-09-26T23:53:47+02:00
 draft: false
 toc: false
+license: null
 
 #menu: main
 weight: 50
 ---
 
-[Online version of this license with translations]
-(https://creativecommons.org/licenses/by-sa/4.0/legalcode
-"Creative Commons Attribution-ShareAlike 4.0")
+Unless otherwise noted, content on this website is licensed under the
+__Creative Commons Attribution-ShareAlike 4.0__ license. You can find a
+copy of the license below or you can use [this online version] which
+includes translations for other languages.
+
+[this online version]: https://creativecommons.org/licenses/by-sa/4.0/legalcode "Creative Commons Attribution-ShareAlike 4.0"
+[Hugo]: https://gohugo.io/ "The world’s fastest framework for building websites"
+[this]: https://github.com/ansemjo/hugo-theme-hackcss "Hugo theme: hackcss"
 
 # Creative Commons Attribution-ShareAlike 4.0 International Public License
 

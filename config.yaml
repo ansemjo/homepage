@@ -44,7 +44,7 @@ menu:
 params:
   title: 'semjonov.de'
   author: Anton Semjonov
-  license: "Licensed under [Creative Commons BY-SA 4.0](/license.html)"
+  license: "licensed under [Creative Commons BY-SA 4.0](/license.html)"
   repository: https://github.com/ansemjo/hugo-website
 
 

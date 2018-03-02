@@ -6,7 +6,7 @@ modified: 2018-02-22
 draft: false
 toc: false
 
-copyright: null
+license: null
 
 menu: main
 weight: 50
