@@ -35,6 +35,82 @@ the necessary steps below.
 ## Install `python-vipaccess`
 
 [Apparently] the VIP Access tokens are based on the open TOTP standard, which is supported
-by most authenticator apps. 
+by most authenticator apps. Based on this reverse-engineering effort, @cyrozap and @dlenski
+built a handy little python script which allows us to provision new tokens:
+https://github.com/dlenski/python-vipaccess
 
 [Apparently]: https://www.cyrozap.com/2014/09/29/reversing-the-symantec-vip-access-provisioning-protocol
+
+Installing it directly via `pip` failed for me but installing the dependencies
+seperately and then installing the script from a cloned repository worked fine:
+
+```sh
+$ cd $(mktemp -d)
+$ sudo pip install lxml oath pycryptodome requests
+$ git clone https://github.com/dlenski/python-vipaccess .
+$ sudo pip install .
+```
+
+_Note: Make sure to use Python 3's `pip`, called `python3-pip` or `pip3` in some distributions._
+
+## Provision a new token
+
+This should have installed the `vipaccess` command on your system. Now run
+`vipaccess provision -p -t VSMT` to provision a new 'mobile token'. If you get an
+`Something went wrong--the token is invalid.` error, check your installation of `python-cryptodome`.
+Otherwise you should see output like this:
+
+```
+$ vipaccess provision -p -t VSMT
+Generating request...
+Fetching provisioning response...
+Getting token from response...
+Decrypting token...
+Checking token...
+Credential created successfully:
+	otpauth://totp/VIP%20Access:VSMT89594652?secret=GAHXEUAHO6KE63TUJGVHS53VVKHACPVN&digits=6&period=30&algorithm=sha1&issuer=Symantec
+This credential expires on this date: 2021-03-02T14:46:00.744Z
+
+You will need the ID to register this credential: VSMT89594652
+
+You can use oathtool to generate the same OTP codes
+as would be produced by the official VIP Access apps:
+
+    oathtool -d6 -b --totp    GAHXEUAHO6KE63TUJGVHS53VVKHACPVN  # 6-digit code
+    oathtool -d6 -b --totp -v GAHXEUAHO6KE63TUJGVHS53VVKHACPVN  # ... with extra information
+```
+
+_(This is a new and unused token.)_
+
+## Save in your 2FA app
+
+This step depends on what kind of application you use. You don't necessarily have to
+use a smartphone app of course. Usually, you'll want to display a QR code to scan with
+your app, though. I use [`qrencode`] for this.
+
+[`qrencode`]: https://wiki.ubuntuusers.de/qrencode/
+
+To modify the title of your entry, you can edit the string starting with `otpauth://...`. So
+instead of
+
+`otpauth://totp/VIP%20Access:VSMT89594652?secret=...`
+
+you could use
+
+`otpauth://totp/PayPal:VSMT89594652?secret=...`.
+
+The string needs to be urlencoded though, so e.g. use `%20` instead of spaces. Then
+display a QR code in your terminal with `qrencode` and scan it with your app:
+
+```
+$ qrencode -t UTF8 "otpauth://totp/PayPal:VSMT89594652?secret=GAHXEUAHO6KE63TUJGVHS53VVKHACPVN&digits=6&period=30&algorithm=sha1&issuer=Symantec"
+█████████████████████████████████████████████████
+█████████████████████████████████████████████████
+████ ▄▄▄▄▄ ██ ███▄▄▄▀ ▄▄ ▀█ ▄▀█▀ ██▄▀█ ▄▄▄▄▄ ████
+████ █   █ █▀▀   █ ▄▀█ ▄ ▀█▀  █▄█▄▄▀▀█ █   █ ████
+████ █▄▄▄█ █▄█ ▄▀▄  ▄ ▄▀▄▄▀▀▀ ▀█▄█ █▄█ █▄▄▄█ ████
+████▄▄▄▄▄▄▄█▄█ ▀▄█ ▀ ▀▄▀▄▀ ▀ ▀ ▀▄█ █▄█▄▄▄▄▄▄▄████
+████▄ ▀▀▀▄▄ ██▄▀█  █ ▀▄ ▀▄▄▄▄▄▄█ ▄▀▀▄▀█▀ ▄▀▀▀████
+████ █ ▄▀█▄▀▀▄ ██ ▄   ▀ ▄▄▄▄█ ▄▄█  █▄▄  █▀██ ████
+...
+```
