@@ -5,7 +5,7 @@
 COMMIT := $(shell git rev-parse --short  HEAD)
 
 # construct archive names
-ARCHIVE  := public-$(COMMIT).tar
+ARCHIVE  := dist-$(COMMIT).tar
 SUFFIXES := xz gz bz2 lz
 ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 
@@ -25,8 +25,8 @@ $(ARCHIVES) : public/index.html
 # aliases for different archives
 ## dist      : create a compressed archive of built site
 ## dist.%    : create a .% compressed archive (gz, xz, bz2, lz)
-cleandist : clean dist.xz ;
-dist 			: dist.xz ;
+cleandist : clean dist.lz ;
+dist 			: dist.lz ;
 dist.% 		: $(ARCHIVE).% ;
 
 # checkout theme submodules
