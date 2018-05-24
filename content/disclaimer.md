@@ -36,3 +36,6 @@ Als Diensteanbieter bin ich gemäß § 7 Abs.1 TMG für eigene Inhalte auf diese
 
 Mein Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
 
+## Datenschutz
+
+Diese Seite erhebt und speichert keine personenbezogenen Informationen, verwendet keine Cookies und der nginx Webserver speichert nur anonymisierte Log Einträge der Form `log_format anonymized '$host $status $request ($body_bytes_sent bytes) $http_referer "$http_user_agent"';`. Diese Einträge dienen lediglich der Nachvollziehbarkeit von technischen Problemen oder Eindringungsversuchen und werden nicht mit Dritten geteilt.
