@@ -9,7 +9,9 @@ license: null
 weight: 50
 ---
 
-Unless otherwise noted, content on this website is licensed under the
+[^ofl]: Fonts are licenced under the [OFL](/fonts/LICENSE).
+
+Unless otherwise noted[^ofl], content on this website is licensed under the
 __Creative Commons Attribution-ShareAlike 4.0__ license. You can find a
 copy of the license below or you can use [this online version] which
 includes translations for other languages.
