@@ -14,7 +14,9 @@ weight: 50
 
 # E-Mail
 
-I'm happy to send and receive encrypted mail with OpenPGP. Please use the key with the following fingerprint and any of the assigned uids/emails. You can [download] my key and see some proof of ownership on [keybase].
+I'm happy to send and receive encrypted mail with OpenPGP. Please use the key with the following
+fingerprint and any of the assigned uids/emails. You can [download] my key and see some proof of
+ownership on [keybase].
 
 `51844B60E033448AF95D3D1314DDF1F6663C02E1`
 

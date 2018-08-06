@@ -15,16 +15,14 @@ weight: 100
 
 Betreiber der Seite und außerdem verantwortlich für den Inhalt ist:
 
-{{< field Kontakt >}}
-__Anton Semjonov__
+```
+Anton Semjonov
 webmaster /ät semjonov.de
-{{< /field >}}
 
-{{< field Anschrift >}}
 Rodigallee 55 b
 22043 Hamburg
 Germany
-{{< /field >}}
+```
 
 ## Haftungsausschluss (Disclaimer)
 

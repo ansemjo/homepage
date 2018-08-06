@@ -3,7 +3,7 @@
 baseURL: https://semjonov.de/
 title: semjonov.de
 LanguageCode: en
-theme: hackcss
+theme: plain
 Paginate: 5
 enableGitInfo: true
 disableKinds:
