@@ -1,5 +1,7 @@
 # targets that do not correspond to real files
-.PHONY : veryclean clean build rebuild cleandist dist dist.*
+.PHONY : prerequisites veryclean clean default serve build rebuild cleandist dist dist.*
+
+default : build
 
 # get most recent commit hash
 COMMIT := $(shell git rev-parse --short  HEAD)
@@ -9,13 +11,19 @@ ARCHIVE  := dist-$(COMMIT).tar
 SUFFIXES := xz gz bz2 lz
 ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 
+prerequisites : themes/hackcss/LICENSE ;
+
+## serve     : build and serve from memory
+serve	: prerequisites
+	hugo serve --disableFastRender --bind 0.0.0.0
+
 ## build     : use hugo to build the site [default]
 ## rebuild   : clean and build
 build   : public/index.html ;
 rebuild : veryclean build ;
 
 # run hugo to build public site
-public/index.html : themes/hackcss/LICENSE
+public/index.html : prerequisites
 	hugo --ignoreCache
 
 # create compressed archive from built site
