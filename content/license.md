@@ -4,6 +4,7 @@ date: 2017-09-26T23:53:47+02:00
 draft: false
 toc: false
 license: null
+noindex: yes
 
 #menu: main
 weight: 50

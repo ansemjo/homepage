@@ -5,7 +5,7 @@ modified: 2018-02-22
 
 draft: false
 toc: false
-
+noindex: yes
 license: null
 
 menu: main
