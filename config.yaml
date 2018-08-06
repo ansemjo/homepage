@@ -1,28 +1,24 @@
----
-# general settings
 baseURL: https://semjonov.de/
-title: semjonov.de
-LanguageCode: en
+title: semjonov.de blog
+
+params:
+  author: Anton Semjonov
+  license: licensed under [Creative Commons BY-SA 4.0](/license.html)
+  repository: https://github.com/ansemjo/hugo-semjonov.de
+
 theme: plain
-Paginate: 5
-enableGitInfo: true
+paginate: 5
+
+enableGitInfo: no
+disableHugoGeneratorInject: yes
+
 disableKinds:
-  - RSS
-
-
-# building directories
-contentDir: content
-publishDir: public
-
-
-# url structure
-uglyURLs: true
+  - sitemap
+taxonomies:
+  tags: tags
 permalinks:
-  #post: /:section/:slug
+  post: /:section/:year-:month/:slug
 
-
-# permanent menu links
-# others can be added in post frontmatter
 menu:
   main:
 
@@ -32,26 +28,7 @@ menu:
 
     - name: Tags
       weight: 2
-      url: /tags.html
+      url: /tags/
 
-    - name: Categories
-      weight: 3
-      url: /categories.html
-
-
-
-# miscellaneous site settings
-params:
-  title: 'semjonov.de'
-  author: Anton Semjonov
-  license: "licensed under [Creative Commons BY-SA 4.0](/license.html)"
-  repository: https://github.com/ansemjo/hugo-website
-
-
-# markdown parser
 blackfriday:
-  smarypants:     true
-  angledQuotes:   true
-  fractions:      true
-
-...
+  noreferrerLinks:  yes
