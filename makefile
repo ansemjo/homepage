@@ -1,5 +1,5 @@
 # targets that do not correspond to real files
-.PHONY : prerequisites veryclean clean default serve build rebuild cleandist dist dist.*
+.PHONY : veryclean clean default serve build rebuild cleandist dist dist.*
 
 default : build
 
@@ -11,10 +11,8 @@ ARCHIVE  := dist-$(COMMIT).tar
 SUFFIXES := xz gz bz2 lz
 ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
 
-prerequisites : themes/hackcss/LICENSE ;
-
 ## serve     : build and serve from memory
-serve	: prerequisites
+serve	: themes/plain/.git
 	hugo serve --disableFastRender --bind 0.0.0.0
 
 ## build     : use hugo to build the site [default]
@@ -23,7 +21,7 @@ build   : public/index.html ;
 rebuild : veryclean build ;
 
 # run hugo to build public site
-public/index.html : prerequisites
+public/index.html : themes/plain/.git
 	hugo --ignoreCache
 
 # create compressed archive from built site
@@ -38,7 +36,7 @@ dist 			: dist.lz ;
 dist.% 		: $(ARCHIVE).% ;
 
 # checkout theme submodules
-themes/hackcss/LICENSE :
+themes/%/.git :
 	git submodule update --init
 
 ## clean     : use git to clean untracked files and folders
