@@ -61,7 +61,8 @@ work great for me:
 
 To connect from my laptop, I use [picocom](https://linux.die.net/man/8/picocom)
 after adding my user to the `uucp` group:
-```
+
+```shell
 $ ll /dev/ttyUSB*
 crw-rw---- 1 root uucp 188, 0 Jan 19 16:15 /dev/ttyUSB0
 $ picocom -b 115200 /dev/ttyUSB0
@@ -107,7 +108,7 @@ with `mkfs.vfat`:
 [post]: https://communities.vmware.com/thread/474473
 [scripted approach]: https://superuser.com/a/984637
 
-```
+```shell
 $ sed 's/\s*\([^\s]*\) #.*/\1/' <<EOF | fdisk /dev/sdX
 o # new msdos partiton table
 n # new partition
@@ -128,7 +129,7 @@ $ mkfs.vfat -F 32 -n USB /dev/sdX1
 Now mount that partition somewhere, install Syslinux on it and copy the VMware
 Installer ISO.
 
-```
+```shell
 $ cat /usr/lib/syslinux/bios/mbr.bin > /dev/sdX
 $ syslinux /dev/sdX1
 $ mount /dev/sdX1 /mnt

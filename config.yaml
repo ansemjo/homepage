@@ -32,3 +32,6 @@ menu:
 
 blackfriday:
   noreferrerLinks:  yes
+pygmentsUseClasses: yes
+pygmentsCodefences: yes
+pygmentsCodefencesGuessSyntax: yes
