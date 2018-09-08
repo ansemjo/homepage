@@ -20,6 +20,10 @@ serve	: themes/plain/.git
 build   : public/index.html ;
 rebuild : veryclean build ;
 
+## deploy    : build and deploy the site
+deploy  : build
+	ansible-playbook deploy.yml
+
 # run hugo to build public site
 public/index.html : themes/plain/.git
 	hugo --ignoreCache
