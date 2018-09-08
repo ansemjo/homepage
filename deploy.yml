@@ -1,0 +1,46 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- hosts: muliphein.semjonov.de
+  become: yes
+
+  vars:
+
+    webroot: /srv/www/semjonov.de
+
+  tasks:
+
+    - name: nginx and ansible are installed
+      yum:
+        name:
+          - nginx
+          - rsync
+        state: present
+
+    - name: selinux file context definition present
+      sefcontext:
+        target: "{{ webroot }}(/.*)?"
+        setype: httpd_sys_content_t
+        state: present
+
+    - name: webroot directory created
+      file:
+        path: "{{ webroot }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+      notify: restorecon
+
+    - name: built files are synchronized
+      synchronize:
+        src: public/
+        dest: "{{ webroot }}"
+        owner: no
+        group: no
+      notify: restorecon
+
+  handlers:
+
+    - name: restorecon
+      shell: 'restorecon -R -v "{{ webroot }}"'
