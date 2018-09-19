@@ -20,7 +20,8 @@ period of time.
 
 # speedtest-cli
 
-Everybody probably knows sites like speedtest.net, speedof.me and the
+Everybody probably knows sites like [speedtest.net](http://www.speedtest.net/),
+[speedof.me](https://speedof.me/) and the
 [various](https://kabel.vodafone.de/hilfe_und_service/speedtest)
 [speedtest](http://speedtest.t-online.de/#/) [sites](https://www.verizon.com/speedtest/) hosted by
 ISPs.
@@ -74,7 +75,7 @@ series. Of course, there are tools to create graphs on the commandline! After a 
 exactly what I was looking for with [gnuplot](http://gnuplot.sourceforge.net/). I must admit, it did
 not feel intuitive at all but fortunately you only have to do this part once.
 
-After a couple of stackoverflow ansers and a few pages of documentation, this is what I came up
+After a couple of stackoverflow answers and a few pages of documentation, this is what I came up
 with:
 
     set title "Speedtest Results, acspl smoothing\n\
