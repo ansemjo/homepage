@@ -148,3 +148,14 @@ To sum up ..
   `.gitattributes` file
 - build your software from `git archive HEAD` archives
 - optionally check for the `Format:` substring and replace with a default like `development`
+
+# version.<!--nolink-->sh
+
+I took the ideas from this post and some inspiration from a
+[pull request](https://github.com/rootless-containers/slirp4netns/pull/35) to actually implement
+this versioning in an existing project and wrote
+[ansemjo/version.sh](https://github.com/ansemjo/version.sh). It is a bash script which uses the
+format substitution explained above to output normalized version strings whether you are running it
+in checked-out repository or from a downloaded tarball. This somewhat eases the need to reimplement
+this idea in every language you use. Almost all languages should have a way to call subprocesses and
+use their output somehow.
