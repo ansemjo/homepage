@@ -1,3 +1,3 @@
-themes/
 public/
-dist-*.tar*
+resources/
+dist-*.tar.gz

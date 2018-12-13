@@ -1,56 +1,54 @@
-# targets that do not correspond to real files
-.PHONY : veryclean clean default serve build rebuild cleandist dist dist.*
-
-default : build
+##>>> ansemjo/blog
+.DEFAULT_GOAL := dist
 
 # get most recent commit hash
-COMMIT := $(shell git rev-parse --short  HEAD)
+COMMIT := $(shell git describe --always --abbrev --dirty)
 
-# construct archive names
-ARCHIVE  := dist-$(COMMIT).tar
-SUFFIXES := xz gz bz2 lz
-ARCHIVES := $(addprefix $(ARCHIVE).,$(SUFFIXES))
+# get theme name from config
+THEME := $(shell sed -n 's/theme = "\(.*\)"/\1/p' config.toml)
 
-## serve     : build and serve from memory
-serve	: themes/plain/.git
+##  serve     : build and serve from memory
+.PHONY: serve
+serve	: themes/$(THEME)/.git
 	hugo serve --disableFastRender --bind 0.0.0.0
 
-## build     : use hugo to build the site [default]
-## rebuild   : clean and build
+##  build     : use hugo to build the site
+##  rebuild   : clean and build
+.PHONY: build rebuild
 build   : public/index.html ;
 rebuild : veryclean build ;
 
-## deploy    : build and deploy the site
-deploy  : rebuild
+##  deploy    : build and deploy the site
+.PHONY: deploy
+deploy : rebuild
 	ansible-playbook deploy.yml
 
 # run hugo to build public site
-public/index.html : themes/plain/.git
+public/index.html : themes/$(THEME)/.git $(shell find content/ -type f) config.*
 	hugo --ignoreCache
-
-# create compressed archive from built site
-$(ARCHIVES) : public/index.html
-	tar caf "$@" --directory public .
-
-# aliases for different archives
-## dist      : create a compressed archive of built site
-## dist.%    : create a .% compressed archive (gz, xz, bz2, lz)
-cleandist : clean dist.lz ;
-dist 			: dist.lz ;
-dist.% 		: $(ARCHIVE).% ;
 
 # checkout theme submodules
 themes/%/.git :
 	git submodule update --init
 
-## clean     : use git to clean untracked files and folders
-clean :
-	git clean -dfx
+##> dist      : create a compressed archive of built site
+.PHONY: dist
+ARCHIVE := dist-$(COMMIT).tar.gz
+dist : $(ARCHIVE)
+$(ARCHIVE) : public/index.html
+	tar czf $@ -C public/ .
 
-## veryclean : clean and deinit all submodules (themes)
+##  clean     : use git to clean untracked files and folders
+.PHONY: clean
+clean :
+	git clean -fdx
+
+##  veryclean : clean and deinit all submodules (themes)
+.PHONY: veryclean
 veryclean : clean
 	git submodule deinit --all --force
 
-## help      : usage help
+##  help      : usage help
+.PHONY: help
 help :
 	@sed -n 's/^##//p' makefile
