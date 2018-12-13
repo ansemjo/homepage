@@ -5,6 +5,10 @@ date: 2018-09-19T20:51:03+02:00
 
 toc: true
 
+resources:
+  - name: img:counter
+    src: '**.png'
+
 tags:
   - docker
   - networks
@@ -60,7 +64,7 @@ You can find my project [on GitHub](https://github.com/ansemjo/speedtest-plotter
 
 When you think you've had enough, run `docker logs` and look at your data.
 
-![](/images/speedtest-plotter/resultscsv.png)
+![](resultscsv.png)
 
 Wonderful. What now?
 
@@ -104,17 +108,17 @@ with:
 Save your results in `results.csv` and the above script in `plotscript`. Then run
 `gnuplot ./plotscript` and you'll be rewarded with a graph:
 
-![](/images/speedtest-plotter/example.png)
+![](example.png)
 
 Leave the container running for a day, apply a different smoothing function and you'll end up with
 something that clearly shows some variation with the time of day:
 
-![](/images/speedtest-plotter/example_bezier.png)
+![](example_bezier.png)
 
 But that is still nowhere near the promised 500 Mbps? Have you tried .. you know .. turning it off
 and on again?
 
-![](/images/speedtest-plotter/restart.png)
+![](restart.png)
 
 A-ha! So a router reboot 'fixed' my slow connection? This is just the beginning of my debugging
 effort but visualizing the data definitely helped.

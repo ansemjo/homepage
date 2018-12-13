@@ -98,7 +98,11 @@ you could use
 The string needs to be urlencoded though, so e.g. use `%20` instead of spaces. Then
 display a QR code in your terminal with `qrencode` and scan it with your app:
 
-![](/images/paypal-2fa-app/0.png "$ qrencode -t UTF8 'otpauth://totp/PayPal:VSMT89594652?secret=GAHXEUAHO6KE63TUJGVHS53VVKHACPVN&digits=6&period=30&algorithm=sha1&issuer=Symantec'")
+```
+$ qrencode -t UTF8 'otpauth://totp/PayPal:VSMT89594652?secret=GAHXEUAHO6KE63TUJGVHS53VVKHACPVN&digits=6&period=30&algorithm=sha1&issuer=Symantec'
+```
+
+![](0.png "qrencode output of the command above")
 
 Note that using an online tool to create this QR code might not be the wisest idea. Please don't
 use this example either.

@@ -53,7 +53,7 @@ should also increase the baud rate to something sensible like 115200 in the
 advanced features of the FTDI chip in your nullmodem cable but these settings
 work great for me:
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/6.png)
+![](6.png)
 
 To connect from my laptop, I use [picocom](https://linux.die.net/man/8/picocom)
 after adding my user to the `uucp` group:
@@ -69,7 +69,7 @@ serial and reach the BIOS Setup and then disable the `Integrated Graphic Device`
 under `Advanced > Chipset Configuration > North Bridge > Graphics
 Configuration`:
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/7.png)
+![](7.png)
 
 I am actually not sure if this is required. But I disabled it and had no
 more problems during installation. And since I now had a working serial
@@ -157,7 +157,7 @@ Insert the prepared USB stick into one of the USB ports of your X10SBA and make
 sure that you are booting from it. You might need to adjust the boot order in
 your BIOS. I chose the internal USB-A header on the motherboard.
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/4.jpg)
+![](4.jpg)
 
 Since we didn't install any EFI binaries it should boot in legacy BIOS mode. But
 just make sure it does anyway because the ISO is certainly containing EFI
@@ -166,19 +166,19 @@ booting through those.
 
 You should be greeted by this screen:
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/0.png)
+![](0.png)
 
 Wait for the ISO to load and then quickly press `Tab` in the second loader to
 add additional kernel options `gdbPort=none logPort=none tty2Port=com1`:
 [reference](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.install.doc/GUID-B67A3552-CECA-4BF7-9487-4F36507CD99E.html)
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/1.png)
+![](1.png)
 
 Append those options and press Enter. Nothing will happen for a few seconds
 until you'll see loaded modules rushing by and you are finally greeted by the
 VMware ESXi Installer:
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/2.png)
+![](2.png)
 
 At this point I had to disable the fullscreen shortcut key `F11` in my
 gnome-terminal settings since this key is used to accept various options in the
@@ -207,14 +207,14 @@ As far as I can tell, the default settings for both `VMkernel.Boot.logPort` and
 `VMkernel.Boot.tty2Port` to `com1`. If you want to be sure, you can set both 
 `logPort` and `gdbPort` to `none` to definitely disable them.
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/3.png)
+![](3.png)
 
 After this you can reboot. It shouldn't matter if you are booting through UEFI
 or legacy BIOS mode anymore either, since you should see output on the serial
 console as soon as the VMKernel starts initializing (which takes a little more
 than a minute in my case).
 
-![](/images/install-esxi-6.5-on-a-supermicro-x10sba/5.png)
+![](5.png)
 
 Voilà!
 
