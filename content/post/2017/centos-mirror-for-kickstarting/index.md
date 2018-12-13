@@ -10,7 +10,7 @@ tags:
 
 _This is an update over my [earlier post] about PXE booting. I've learned a few more things and refined some rough edges._<br>
 
-[earlier post]: {{< relref "local-pxe-boot.md" >}}
+[earlier post]: {{< ref "/post/2017/local-pxe-boot/index.md" >}}
 
 My Motivation is similar to the last post: I started building my homelab with virtual machines. Most of them are based on a minimal CentOS 7 installation, and as such I have a lot of very similar systems. Yes, I could probably use containers to great effect. But I prefer the separation/isolation that I get from virtual machines on ESXi.
 
