@@ -3,9 +3,6 @@ title: Access Ghost via UNIX Socket
 date: 2016-02-16
 draft: false
 toc: false
-categories:
-  - blog
-  - technology
 tags:
   - ghost
   - systemd

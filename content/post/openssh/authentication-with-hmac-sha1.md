@@ -3,9 +3,6 @@ title: OpenSSH + YubiKey HMAC-SHA1 challenge-response
 date: 2016-03-23
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - linux
   - openssh

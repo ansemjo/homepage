@@ -3,9 +3,6 @@ title: On-Demand Socket Forwarding with Systemd
 date: 2016-06-06
 draft: false
 toc: true
-categories:
-  - blog
-  - notes
 tags:
   - systemd
   - mysql

@@ -3,8 +3,6 @@ title: Signed Npm Version Bumps
 date: 2017-01-14
 draft: false
 toc: true
-categories:
-  - notes
 tags:
   - npm
   - gpg

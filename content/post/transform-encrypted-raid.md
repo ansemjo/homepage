@@ -3,9 +3,6 @@ title: Transforming an encrypted array from RAID 1 to RAID 6
 date: 2016-05-16
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - mdadm
   - linux

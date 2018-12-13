@@ -3,9 +3,6 @@ title: Freifunk VLAN
 date: 2016-03-01
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - networks
   - freifunk

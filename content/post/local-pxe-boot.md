@@ -3,9 +3,6 @@ title: Local PXE Boot Server
 date: 2017-03-09
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - linux
   - automation

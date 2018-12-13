@@ -3,9 +3,6 @@ title: OpenSSH + OATH-TOTP
 date: 2016-03-24
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - linux
   - openssh

@@ -6,10 +6,6 @@ date: 2018-03-03T15:17:00+01:00
 draft: false
 toc: true
 
-categories:
-  - blog
-  - guide
-
 tags:
   - 2fa
   - security

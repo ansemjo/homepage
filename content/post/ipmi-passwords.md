@@ -6,10 +6,6 @@ date: 2017-04-06
 draft: false
 toc: false
 
-categories:
-  - blog
-  - technology
-
 tags:
   - virtual-machines
   - security

@@ -6,10 +6,6 @@ date: 2018-01-19T15:35:43+01:00
 draft: false
 toc: true
 
-categories:
-  - blog
-  - guide
-
 tags:
   - linux
   - virtual-machines

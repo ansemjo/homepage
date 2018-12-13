@@ -3,10 +3,6 @@ title: Full Disk Encryption With SecureBoot
 date: 2017-10-08T22:25:40+02:00
 draft: true
 toc: true
-categories:
-  - blog
-  - technology
-  - guide
 tags:
   - linux
   - security

@@ -4,8 +4,6 @@ date: 2017-02-10
 modified: 2017-06-29
 draft: true
 toc: true
-categories:
-  - blog
 tags:
   - database
   - linux

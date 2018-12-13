@@ -9,13 +9,15 @@ params:
 theme: plain
 paginate: 5
 
-enableGitInfo: no
+enableGitInfo: yes
 disableHugoGeneratorInject: yes
 
 disableKinds:
   - sitemap
+
 taxonomies:
-  tags: tags
+  tag: tags
+
 permalinks:
   post: /:section/:year-:month/:slug
 

@@ -3,9 +3,6 @@ title: Install Ghost on an Arch VPS
 date: 2016-04-29
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - linux
   - ghost

@@ -3,9 +3,6 @@ title: PostgreSQL with TLS on CentOS 7.3
 date: 2017-03-28
 draft: true
 toc: true
-categories:
-  - notes
-  - technology
 tags:
   - postgresql
   - linux

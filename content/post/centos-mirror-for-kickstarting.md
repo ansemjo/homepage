@@ -3,9 +3,6 @@ title: Create a CentOS mirror for Kickstarting
 date: 2017-06-29
 draft: false
 toc: true
-categories:
-  - blog
-  - technology
 tags:
   - linux
   - automation
