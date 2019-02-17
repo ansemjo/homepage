@@ -11,7 +11,7 @@ pygmentsCodefencesGuessSyntax = true
 [params]
   author = "Anton Semjonov"
   license = "licensed under [Creative Commons BY-SA 4.0](/license)"
-  repository = "https://github.com/ansemjo/hugo-semjonov.de"
+  repository = "https://github.com/ansemjo/blog"
 
 [taxonomies]
   tag = "tags"
