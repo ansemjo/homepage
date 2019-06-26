@@ -1,5 +1,6 @@
 title = "semjonov.de blog"
 theme = "plain"
+baseUrl = "https://semjonov.de/"
 
 paginate = 5
 enableGitInfo = true
