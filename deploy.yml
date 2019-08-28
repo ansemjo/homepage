@@ -1,7 +1,7 @@
 #!/usr/bin/env ansible-playbook
 ---
 
-- hosts: muliphein.semjonov.de
+- hosts: all
   become: yes
 
   vars:

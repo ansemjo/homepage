@@ -20,8 +20,9 @@ rebuild : veryclean build ;
 
 ##  deploy    : build and deploy the site
 .PHONY: deploy
+deploy : HOST := muliphein.semjonov.de
 deploy : rebuild
-	ansible-playbook deploy.yml
+	ansible-playbook -i $(HOST), -u ansible deploy.yml
 
 # run hugo to build public site
 public/index.html : themes/$(THEME)/.git $(shell find content/ -type f) config.*
