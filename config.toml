@@ -4,6 +4,7 @@ baseUrl = "https://semjonov.de/"
 
 paginate = 5
 enableGitInfo = true
+rssLimit = 20
 
 pygmentsUseClasses = true
 pygmentsCodefences = true
