@@ -127,7 +127,7 @@ Now you can try to connect to this socket. We'll first try with `netcat`:
 ```
 • ~ $ nc -U ~/.ssh/mysqlsock.socket
 Y
-5.5.5-10.1.14-MariaDB<[W~75B/`��!?�xY6B':1%eP@0mysql_native_password
+5.5.5-10.1.14-MariaDB<^A[W~75B/`��!^B?�^UxY6B':1%eP@0mysql_native_password
 ```
 Not really readable. But you see that the connection apparently succeeded.
 
