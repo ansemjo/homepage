@@ -55,7 +55,7 @@ to connect the 5V pin to your Raspberry Pi. You'll likely just draw too much
 current and shut your Pi down.
 
 When everything is connected, install `avrdude` and append the following to the
-global configuration file in `/etc/avrdude.con`:
+global configuration file in `/etc/avrdude.conf`:
 
 ```
 # avr programmer via linux gpio pins
