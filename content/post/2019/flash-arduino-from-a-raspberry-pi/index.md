@@ -4,7 +4,7 @@ description: use the GPIO pins of a Raspberry Pi to flash Arduino boards without
 date: 2019-11-06T21:19:56+01:00
 
 draft: false
-toc: true
+toc: false
 
 tags:
   - linux
