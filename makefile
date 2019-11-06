@@ -18,6 +18,11 @@ serve	: themes/$(THEME)/.git
 build   : public/index.html ;
 rebuild : veryclean build ;
 
+##  new       : create a new post
+.PHONY: new
+new :
+	@bash -c "read -p 'Enter path: ' -ei 'post/$$(date +%Y)/newpost/index.md' path && hugo new \$$path"
+
 ##  deploy    : build and deploy the site
 .PHONY: deploy
 deploy : HOST := muliphein.semjonov.de
