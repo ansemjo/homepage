@@ -23,6 +23,14 @@ Pi instead?
 
 <!--more-->
 
+**Update:** I found out that you can also use FTDI breakout boards like the
+[SparkFun FT232RL][sparkfun] or [Adafruit FT232H][adafruit]. The drivers come
+preinstalled on Linux. I've documented the cabling and configuation [in my wiki][wiki].
+
+[sparkfun]: https://www.sparkfun.com/products/12731 "SparkFun USB to Serial Breakout - FT232RL"
+[adafruit]: https://www.adafruit.com/product/2264 "Adafruit FT232H Breakout - General Purpose USB to GPIO+SPI+I2C"
+[wiki]: https://ansemjo.github.io/wiki/tips/arduino.html "Arduino Tips - ansemjo's docs"
+
 Luckily I purchased a Raspberry Pi Zero W shortly before and I've quickly found
 configuration examples how to use GPIO pins to program an Arduino. Most examples
 use pins spread all around the header though and I wanted to use a more compact
