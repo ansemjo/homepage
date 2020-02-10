@@ -25,6 +25,9 @@ pygmentsCodefencesGuessSyntax = true
   fractions = false
   noreferrerLinks = true
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [menu]
 
   [[menu.main]]
