@@ -84,16 +84,16 @@ since the effect diminishes with lower filament voltage and the required power s
 otherwise -- space and efficiency constraints apply.
 
 To see for myself how bad this effect was I used two pairs of GPIO pins on an Arduino UNO to drive the
-filament with pulse-width modulated *simulated* AC: one pair is driven `HIGH` while the other is set`LOW`,
+filament with pulse-width modulated *simulated* AC: one pair is driven `HIGH` while the other is set `LOW`,
 after a short microsecond delay the direction is switched and some dead time is added to reduce the
 effective output voltage. This approach was detailed in one of the previous builds. Two pairs are used
-in order to stay withing the ATmega328P's maximum current specifications per pin.
+in order to stay within the ATmega328P's maximum current specifications per pin.
 
 <video controls loop autoplay muted>
   <source src="filament_ac.mp4" type="video/mp4">
 </video>
 
-The camera exxagerates the effect a little bit but it definately *is* noticeable! So I think I want
+The camera exaggerates the effect a little bit but it definately *is* noticeable! So I think I want
 to implement some form of AC drive after all ..
 
 I am currently waiting for a large-ish order from DigiKey with enough parts to properly
