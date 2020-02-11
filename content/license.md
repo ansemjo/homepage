@@ -10,16 +10,12 @@ noindex: yes
 weight: 50
 ---
 
-[^ofl]: Fonts are licenced under the [OFL](/fonts/LICENSE).
-
-Unless otherwise noted[^ofl], content on this website is licensed under the
+Unless otherwise noted, content on this website is licensed under the
 __Creative Commons Attribution-ShareAlike 4.0__ license. You can find a
-copy of the license below or you can use [this online version] which
+copy of the license below or you can use the [online version] which
 includes translations for other languages.
 
-[this online version]: https://creativecommons.org/licenses/by-sa/4.0/legalcode "Creative Commons Attribution-ShareAlike 4.0"
-[Hugo]: https://gohugo.io/ "The world’s fastest framework for building websites"
-[this]: https://github.com/ansemjo/hugo-theme-hackcss "Hugo theme: hackcss"
+[online version]: https://creativecommons.org/licenses/by-sa/4.0/legalcode "Creative Commons Attribution-ShareAlike 4.0"
 
 # Creative Commons Attribution-ShareAlike 4.0 International Public License
 
