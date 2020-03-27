@@ -21,7 +21,7 @@ technology dates back to the 70's and you can find some surplus units available 
 <!--more-->
 
 That's how eight [ИВЛ2-7/5](ebay-search) displays came into my posession. The plan is to
-built a simple clock out of them and in the process learn more about bare ATmega programming,
+build a simple clock out of them and in the process learn more about bare ATmega programming,
 electrical circuit design and PCB layouting -- in the end I would like to order my first
 batch of manufactured PCBs and place the parts myself.
 
