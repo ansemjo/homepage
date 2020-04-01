@@ -1,5 +1,5 @@
 ---
-title: Behelfs-Mund-Nasen-Schutz nähen
+title: Behelfs-Mund-Nasen-Maske nähen
 description: In Zeiten von Coronavirus und Mangel an Atemschutzmasken eine Behelfslösung selber herstellen.
 date: 2020-03-27T13:34:07+01:00
 
@@ -22,7 +22,7 @@ Aktuell verbreitet sich das neuartige Coronavirus (SARS-CoV-2) rasant auf der ge
 
 ### Haftungsausschluss
 
-Gleich vorneweg: ich übernehme **keinerlei Haftung** für die Wirksamkeit, die Herstellung oder die sachgerechte Verwendung dieses Mundschutzes. Das sollte eigentlich klar sein, aber dies ist **kein** Ersatz für eine zertifizierte FFP2 oder FFP3 Maske, die korrekt sitzt. Die Herstellung und Verwendung geschieht daher ausschließlich auf eigene Gefahr.
+Gleich vorneweg: ich übernehme **keinerlei Haftung** für die Wirksamkeit, die Herstellung oder die sachgerechte Verwendung dieser Mundbedeckung. Das sollte eigentlich klar sein, aber dies ist **kein** Ersatz für eine zertifizierte FFP2 oder FFP3 Maske, die korrekt sitzt. Die Herstellung und Verwendung geschieht daher ausschließlich auf eigene Gefahr.
 
 Auch an dieser Stelle sei auf die [Hygienehinweise des RKI](https://www.infektionsschutz.de/coronavirus/) hingewiesen. **Wascht euch die Hände.** **Haltet Abstand.** Dadurch schützt ihr euch im Zweifel sehr viel effektiver.
 
