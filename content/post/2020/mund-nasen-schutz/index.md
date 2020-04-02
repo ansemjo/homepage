@@ -1,6 +1,6 @@
 ---
 title: Behelfs-Mund-Nasen-Maske nähen
-description: In Zeiten von Coronavirus und Mangel an Atemschutzmasken eine Behelfslösung selber herstellen.
+description: Aus Baumwollstoff eine Behelfs-Mundbedeckung selber herstellen.
 date: 2020-03-27T13:34:07+01:00
 
 draft: false
@@ -22,9 +22,9 @@ Aktuell verbreitet sich das neuartige Coronavirus (SARS-CoV-2) rasant auf der ge
 
 ### Haftungsausschluss
 
-Gleich vorneweg: ich übernehme **keinerlei Haftung** für die Wirksamkeit, die Herstellung oder die sachgerechte Verwendung dieser Mundbedeckung. Das sollte eigentlich klar sein, aber dies ist **kein** Ersatz für eine zertifizierte FFP2 oder FFP3 Maske, die korrekt sitzt. Die Herstellung und Verwendung geschieht daher ausschließlich auf eigene Gefahr.
+Gleich vorneweg: die hier vorgestellte Mundbedeckung ist **keine** Schutzmaske! Ich übernehme **keinerlei Haftung** für die Wirksamkeit, die Herstellung oder die sachgerechte Verwendung dieser Mundbedeckung. Das sollte eigentlich klar sein, aber dies ist **kein** Ersatz für eine zertifizierte FFP2 oder FFP3 Maske, die korrekt sitzt. Die Herstellung und Verwendung geschieht daher ausschließlich auf eigene Gefahr.
 
-Auch an dieser Stelle sei auf die [Hygienehinweise des RKI](https://www.infektionsschutz.de/coronavirus/) hingewiesen. **Wascht euch die Hände.** **Haltet Abstand.** Dadurch schützt ihr euch im Zweifel sehr viel effektiver.
+An dieser Stelle sei auch auf die [Hygienehinweise des RKI](https://www.infektionsschutz.de/coronavirus/) hingewiesen. **Wascht euch die Hände.** **Haltet Abstand.** Dadurch schützt ihr euch im Zweifel sehr viel effektiver.
 
 ### Prior Art
 
@@ -36,7 +36,7 @@ Heute morgen stieß ich dann auf [ein Bild](https://imgur.com/dbbIJqy), in dem d
 
 ### Wirksamkeit
 
-Wie eingangs erwähnt kann eine Maske aus Stoff auf garkeinen Fall eine dicht abschließende FFP2 oder FFP3 Maske ersetzen. Auch im Vergleich zu einfacheren OP-Masken erreicht Baumwollstoff nur einen Bruchteil der Filterleistung. Ihr schützt mit so einer Maske vor allem andere Menschen und *nicht euch selbst*. Aber auch eine einfache Maske ist besser als gar keine Maske. Lasst nur kein falsches Sicherheitsgefühl aufkommen und denkt trotzdem daran euch die Hände zu waschen. Behandelt vor allem auch die Außenseite der Maske nach dem Tragen als kontaminierte Oberfläche!
+Wie eingangs erwähnt kann eine Maske aus Stoff auf garkeinen Fall eine dicht abschließende FFP2 oder FFP3 Maske ersetzen. Auch im Vergleich zu einfacheren OP-Masken erreicht Baumwollstoff nur einen *Bruchteil* der Filterleistung. Ihr helft mit so einer Maske vor allem andere Menschen und *nicht euch selbst*. Aber auch eine einfache Maske ist besser als gar keine Maske. Lasst nur kein falsches Sicherheitsgefühl aufkommen und denkt trotzdem daran euch die Hände zu waschen. Behandelt vor allem auch die Außenseite der Maske nach dem Tragen als kontaminierte Oberfläche!
 
 Einige Wissenschaftler der Cambridge Universität haben die Effektivität verschiedener Stoffe für DIY Masken untersucht und sind zu dem Schluss gekommen, dass 100% Baumwollstoff und antimikrobielle Kissenbezüge am besten geeignet sind:
 
