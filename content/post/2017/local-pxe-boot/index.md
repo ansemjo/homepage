@@ -10,7 +10,7 @@ tags:
 
 # 1. motivation
 
-Today I set out to setup a local CentOS mirror for quicker PXE installations of my virtual machines. In the long run this will probably be superseded by a [Spacewalk] machine and until now [netboot.xyz] has served me well. For the time being I just wanted a faster alternative.
+Today I set out to setup a local CentOS mirror for quicker PXE installations of my virtual machines. In the long run this will probably be superseded by a [Spacewalk] machine (**update:** discontinued on May 31, 2020) and until now [netboot.xyz] has served me well. For the time being I just wanted a faster alternative.
 
 The kpxe file for [netboot.xyz] is tiny and can easily be used with the builtin TFTP server of OpenWRT / LEDE project or any other TFTP server. It uses signatures to verify the downloaded files, _however_ it keeps downloading all the files over http because https keeps timing out for me. So, yeah. Also you are downloading a lot of data multiple times if you're deploying multiple machines.
 
