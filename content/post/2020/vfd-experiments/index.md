@@ -29,7 +29,7 @@ batch of manufactured PCBs and place the parts myself.
 
 ## Overview
 
-![](overview.jpg)
+![](overview.jpg "Experiment setup with a VFD and an Arduino on the side.")
 
 In the picture above you can see one of the displays soldered on some protoboard and connected
 to a makeshift power supply on a breadboard. I can't control the digits and segments individually
@@ -101,3 +101,28 @@ multiplex the individual digits and segments. I will attempt to reproduce Rolo's
 for the filament, which is based on a self-oscillating audio amplifier circuit.
 
 Let's see how that goes. :)
+
+
+## Updates
+
+Update: so that went pretty well!
+
+Using the display unit you see in the experiments above, I first built a working prototype
+clock completely on protoboard using enamelled wires for connections. It used a DIP variant
+of the HV5812 display driver and an ATtiny84. There's a few more pictures
+[on my Twitter](https://twitter.com/ansemjo/status/1235315817937596424).
+
+![](protoclock.jpg "Prototype clock built completely on protoboard with enamelled wire and through hole components.")
+
+During these last months I then picked up more and more circuit board design in KiCad. After
+creating a few smaller projects I designed a sandwiched construction with two seperate boards
+for the *display driver* and the logic unit -- the *clock core*.
+
+There was a lot to be learned in this project and I am very happy with the results, even if it
+is just another clock. :)
+
+You can find the entire project on GitHub in [ansemjo/chronovfd](https://github.com/ansemjo/chronovfd/).
+
+![](clockcore.jpg "The backside of the finished chronovfd project, with an ESP32 and several other SMD components.")
+
+![](clockface.jpg "A beautiful VFD clock resting on my monitor stand.")
