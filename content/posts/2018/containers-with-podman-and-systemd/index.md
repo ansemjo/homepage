@@ -3,12 +3,9 @@ title: Managing containers with podman and systemd
 description: Use simple systemd units to supervise your containers.
 date: 2018-11-06T17:32:54+01:00
 
-toc: true
-
 tags:
   - linux
-  - containers
-  - podman
+  - container
   - systemd
 ---
 
@@ -24,7 +21,7 @@ To be honest, I have not investigated Docker's user-namespace capabilities much.
 trying it out. There's even jokes that you should simply put `alias docker=podman` in your
 `.bashrc`.
 
-# lack of a daemon
+## lack of a daemon
 
 The fact that it is just a couple of forking processes and does not use an almighty daemon to fire
 up containers behind the scenes already fascinated me about `rkt` when I began reading up on CoreOS
@@ -51,7 +48,7 @@ started by the daemon and not the commandline tool. But with `podman` both `conm
 [advantages](https://opensource.com/article/18/10/podman-more-secure-way-run-containers) that arise
 from this model. See the linked ASG2018 talk by Dan Walsh above.)
 
-# supervise rootless containers
+## supervise rootless containers
 
 Now combine the fact that you can run containers without being `root` with `podman` on the one hand
 and `systemctl`'s `--user` mode on the other hand and you've got yourself a nice service supervisor.
@@ -116,7 +113,7 @@ After a few [more](https://github.com/containers/libpod/pull/1761)
 [issues](https://github.com/systemd/systemd/pull/10646) are resolved you might even be able to use
 `systemd` within rootless containers to also enable proper service supervision within the container.
 
-# compose
+## compose
 
 Right now, I really miss a feature like Docker's `docker-compose.yml` files. However I hear that
 such a feature is planned. Until then building dependencies through `After=` and `Requires=` and

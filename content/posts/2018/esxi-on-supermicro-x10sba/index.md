@@ -3,13 +3,9 @@ title: Install ESXi 6.5 on a Supermicro X10SBA
 description: Work around problems with the installer by using a serial connection.
 date: 2018-01-19T15:35:43+01:00
 
-draft: false
-toc: true
-
 tags:
-  - linux
-  - virtual-machines
-  - serial-console
+  - virtualization
+  - homelab
 ---
 
 Trying to install VMware ESXi on a number of Intel Bay-Trail boards [apparently]

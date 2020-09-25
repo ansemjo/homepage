@@ -7,7 +7,6 @@ draft: false
 toc: true
 
 tags:
-  - 2fa
   - security
 ---
 
@@ -26,9 +25,9 @@ the necessary steps below.
 [FreeOTP]: https://freeotp.github.io/
 [this blog post]: https://medium.com/@dubistkomisch/set-up-2fa-two-factor-authentication-for-paypal-with-google-authenticator-or-other-totp-client-60fee63bfa4f
 
-# Preparations
+## Preparations
 
-## Install `python-vipaccess`
+### Install `python-vipaccess`
 
 [Apparently] the VIP Access tokens are based on the open TOTP standard, which is supported
 by most authenticator apps. Based on this reverse-engineering effort, @cyrozap and @dlenski
@@ -49,7 +48,7 @@ $ sudo pip install .
 
 _Note: Make sure to use Python 3's `pip`, called `python3-pip` or `pip3` in some distributions._
 
-## Provision a new token
+### Provision a new token
 
 This should have installed the `vipaccess` command on your system. Now run
 `vipaccess provision -p -t VSMT` to provision a new 'mobile token'. If you get an
@@ -78,7 +77,7 @@ as would be produced by the official VIP Access apps:
 
 _(This is a new and unused token.)_
 
-## Save in your 2FA app
+### Save in your 2FA app
 
 This step depends on what kind of application you use. You don't necessarily have to
 use a smartphone app of course. Usually, you'll want to display a QR code to scan with
@@ -107,7 +106,7 @@ $ qrencode -t UTF8 'otpauth://totp/PayPal:VSMT89594652?secret=GAHXEUAHO6KE63TUJG
 Note that using an online tool to create this QR code might not be the wisest idea. Please don't
 use this example either.
 
-# Set up security key
+## Set up security key
 
 To set up this token as a new security key in PayPal, log in and navigate to
 https://www.paypal.com/webscr?cmd=_setup-security-key. You'll be given two options.

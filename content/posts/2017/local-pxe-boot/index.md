@@ -5,12 +5,12 @@ draft: false
 toc: true
 tags:
   - linux
-  - automation
+  - homelab
 ---
 
-# 1. motivation
-
 Today I set out to setup a local CentOS mirror for quicker PXE installations of my virtual machines. In the long run this will probably be superseded by a [Spacewalk] machine (**update:** discontinued on May 31, 2020) and until now [netboot.xyz] has served me well. For the time being I just wanted a faster alternative.
+
+<!--more-->
 
 The kpxe file for [netboot.xyz] is tiny and can easily be used with the builtin TFTP server of OpenWRT / LEDE project or any other TFTP server. It uses signatures to verify the downloaded files, _however_ it keeps downloading all the files over http because https keeps timing out for me. So, yeah. Also you are downloading a lot of data multiple times if you're deploying multiple machines.
 
@@ -23,19 +23,19 @@ _There is also a HowTo for CentOS 6 on their [wiki](https://wiki.centos.org/HowT
 
 ---
 
-# 2. setup
+## setup
 
 The base system will be a recent [CentOS 7.3 minimal] installation. No additional packages were installed during setup, SElinux stays enabled in enforcing mode and `firewalld` is active per the default. A mirror of the current latest CentOS version is a little over 8GB. If you want to install more versions or perhaps other distributions, plan your harddrive space accordingly.
 
 [CentOS 7.3 minimal]: http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso "CentOS 7.3.1611 Minimal Download"
 
 
-## 2.1 network configuration
+### network configuration
 
 First of all, make sure that your TFTP server has a static IP and a running DHCP server points to it for PXE boot. I'm going to skip this step here because I am assuming a seperate DHCP server. _([this wiki](https://wiki.centos.org/HowTos/NetworkInstallServer) might help)_
 
 
-## 2.2 packages
+### packages
 
 We need some additional packages. Namely, we need the TFTP server, some Syslinux files for the PXE menu and a webserver to serve our kickstart file and the local CentOS mirror.
 
@@ -49,7 +49,7 @@ The `syslinux-tftpboot` package puts some files into `/var/lib/tftpboot/` and th
 `httpd` serves files from `/var/www/html/` by default, so we're going to put our kickstart files and mirror there.
 
 
-## 2.3 tftp-server
+### tftp-server
 
 All the menu files for Syslinux are now present but it still lacks configuration. Syslinux expects those in a subdirectory `pxelinux.cfg/` and looks for a file called `default` in there. So let's add a configuration file now:
 
@@ -81,7 +81,7 @@ LABEL centos
 _You see my finished CentOS entry there. The appropriate files are still missing of course .. Observe however: `version='7.3.1611'; arch='x86_64';`. We'll need those values a few times._
 
 
-## 2.4 select a mirror
+### select a mirror
 
 Now would be a good moment to select a mirror, which delivers good performance for you. Either consult the [Mirrorlist] for mirrors close to you or - if your system has `yum-plugin-fastestmirrors`, which probably is the case - take a look at `/var/cache/yum/$arch/$version/timedhosts.txt`. The smaller the last number, the better.
 
@@ -90,7 +90,7 @@ Preferably, use both ressources and choose a mirror which supports the rsync pro
 [Mirrorlist]: https://www.centos.org/download/mirrors/ "List of CentOS Mirrors"
 
 
-## 2.5 kernel images
+### kernel images
 
 The first thing that should load after the Syslinux menu is the kernel. So let's download the appropriate images.
 
@@ -106,7 +106,7 @@ total 47628
 These two files would be located under `/7.3.1611/os/x86_64/images/pxeboot/` on a regular CentOS mirror. If you look back at the Syslinux configuration above, you'll find the kernel and initrd lines matching these files.
 
 
-## 2.6 kickstart
+### kickstart
 
 [Kickstart] is a way to perform automated system installations. This requires another configuration file, which is appended when loading the initrd. Let's create that kickstart file in `/var/www/html/` now. Actually, I'm going to use a subfolder `kickstart/` and a file named `centos.ks`:
 
@@ -168,18 +168,18 @@ A few things to note here:
 * the disk is simply automatically partitioned! careful with any existing partitions or special requirements
 * the root password hash corresponds to a password of literally just `password`! you might want to change this too
 
-### 2.6.1 password hash
+#### password hash
 
 There's a helpful [answer on stackexchange.com](http://unix.stackexchange.com/a/76337), that describes how to create these password hashes on the commandline. Some tutorials simply use openssl and set the algorithm to `md5`, because that's the only one that openssl can generate. Please don't do that. Here's a python one-liner to generate you own salted SHA512 hash:
 
 `python -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'`
 
-### 2.6.2 mirror url
+#### mirror url
 
 You could skip the next step of creating a local CentOS mirror and simply use an existing mirror on the internet. That would work but that would actually be worse than simply using netboot.xyz. Helpful for debugging purposes though.
 
 
-## 2.7 create a local mirror
+### create a local mirror
 
 In order for you to really profit from this local installation, you'll need to create a mirror of the CentOS installation directory. Again, there is a nice HowTo over at the [CentOS wiki].
 
@@ -229,7 +229,7 @@ The last command mirrors the installation files for the current latest release a
 [CentOS wiki]: https://wiki.centos.org/HowTos/CreateLocalMirror "Create a Local Mirror"
 
 
-## 2.8 enable services
+### enable services
 
 As a last step we need to enable both the `tftp-server` as well as the `httpd` daemon. Enable and start both services in one command with systemd:
 
@@ -248,7 +248,7 @@ root @pxe ~ # firewall-cmd --reload
 success
 ```
 
-# 3 success
+## success
 
 If all goes well and you fire up a new PXE-capable machine in this network, you should be greeted with the PXE menu:
 

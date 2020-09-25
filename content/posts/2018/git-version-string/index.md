@@ -1,5 +1,5 @@
 ---
-title: Commit hash replacement in Git archives
+title: Commit Hash Replacement in Git Archives
 description:
   use $Format:%h$ in a file and mark for substitution in downloaded archives with 'file
   export-subst' in .gitattributes
@@ -7,7 +7,7 @@ date: 2018-10-05T19:09:08+02:00
 
 tags:
   - git
-  - development
+  - linux
 ---
 
 Trying to implement some sort of automatic versioning based on your git commits or tags is not as
@@ -16,11 +16,13 @@ modify your project files and increment version counters automatically or embed 
 into software builds - in my case: the `--version` output of Go applications built with
 [cobra](https://github.com/spf13/cobra).
 
+<!--more-->
+
 Ideally, the solution should not require executing some hacked-together scripts or configuring
 overly many settings on developer machines, yet still embed version information when a user
 donwloads a release to build locally. The simpler, the better.
 
-# git hooks
+## git hooks
 
 My first intention was to use [git hooks](https://git-scm.com/docs/githooks). They reside in a
 project's `.git/hooks/` directory and there are a number of different hooks for various steps in
@@ -34,7 +36,7 @@ would need to change the file again ... you see where this is going.
 My biggest gripe with this solution is that custom scripts in the `.git/` directory are not added to
 the repository itself. That means that a fresh clone will not contain those custom hooks of yours.
 
-# build-time scripts
+## build-time scripts
 
 Go supports setting package-level variables at compile time with this `-ldflags` syntax:
 
@@ -46,12 +48,12 @@ use `rev-parse` and it must be used in a git clone which includes all this commi
 agree, this should almost be a given on a developer machine but this is not necessarily the case for
 a downloaded `.tar.gz` archive and you can't use a simple `go get ...`.
 
-# gitattributes
+## .gitattributes
 
 Enter [.gitattributes](https://git-scm.com/docs/gitattributes). You can define a number of different
 normalization operations with gitattributes. Among them are filters and substitutions.
 
-## filters
+### filters
 
 Filters defined in you `.gitattributes` file are really powerful. They enable you to save one thing
 in the repository and replace it with something dynamically generated upon checkout. For example,
@@ -64,7 +66,7 @@ transferred together with the rest of the git tree when pushing or cloning. Whic
 because it would otherwise allow for arbitrary command-execution upon checkout. Imagine a filter
 command which quietly uploads you ssh keys to a pastebin? Yeah, you don't want that.
 
-## export-subst
+### export-subst
 
 Finally, there's the `export-ignore` and `export-subst` attributes. The former allows you to ignore
 certain files during archive creation and the latter allows you to specify
@@ -102,19 +104,21 @@ Then when you build your software for a release, use a temporary directory and a
 git archive. Consider the example of [aenker](https://github.com/ansemjo/aenker), which is built
 with [mkr](https://github.com/ansemjo/makerelease). In `cli/version.go` I have:
 
-    package cli
+```go
+package cli
 
-    import "strings"
+import "strings"
 
-    const Version = "0.4"
-    const Commit  = "$Format:%h$"
+const Version = "0.4"
+const Commit  = "$Format:%h$"
 
-    func SpecificVersion() string {
-    	if strings.Contains(Commit, "Format:") {
-    		return Version + " (development)"
-    	}
-    	return Version + " (commit " + Commit + ")"
-    }
+func SpecificVersion() string {
+	if strings.Contains(Commit, "Format:") {
+		return Version + " (development)"
+	}
+	return Version + " (commit " + Commit + ")"
+}
+```
 
 And when building a release this command gets executed:
 
@@ -139,7 +143,7 @@ And if you download a specific archive to a temporary directory:
     $ aenker --version
     aenker version 0.4 (commit baba7be)
 
-# summary
+## summary
 
 To sum up ..
 
@@ -149,7 +153,7 @@ To sum up ..
 - build your software from `git archive HEAD` archives
 - optionally check for the `Format:` substring and replace with a default like `development`
 
-# version.<!--nolink-->sh
+### version.<!--nolink-->sh
 
 I took the ideas from this post and some inspiration from a
 [pull request](https://github.com/rootless-containers/slirp4netns/pull/35) to actually implement

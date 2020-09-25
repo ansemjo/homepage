@@ -5,8 +5,8 @@ draft: false
 toc: true
 tags:
   - systemd
-  - mysql
-  - sockets
+  - network
+  - database
   - linux
 ---
 

@@ -3,15 +3,10 @@ title: VFD Tube Experiments
 description: bringing old IVL2-7/5 tubes to life again ..
 date: 2020-02-10T23:46:47+01:00
 
-draft: false
-toc: true
-
 tags:
   - electronics
-  - arduino
-  - atmega
-  - microcontroller
   - vfd
+  - arduino
 ---
 
 Vacuum flourescent displays are a beautiful piece of retro technology. Noritake Itron

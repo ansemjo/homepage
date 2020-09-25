@@ -4,7 +4,7 @@ date: 2016-03-01
 draft: false
 toc: true
 tags:
-  - networks
+  - network
   - freifunk
 ---
 
@@ -12,22 +12,20 @@ tags:
 [Gluon]: https://github.com/freifunk-gluon/gluon "GitHub: freifunk-gluon"
 [OpenWRT Wiki]: https://wiki.openwrt.org/toh/tp-link/tl-wr841nd#hardware_v9 "OpenWRT: TL-841ND"
 
-# Freifunk explained
+## Freifunk explained
 
 > The vision of [Freifunk] is the establishment of free networks, the democratization of communication media and the promotion of local social structures.
 
 Basically, if you want to participate in a Freifunk community, you take a router capable of running OpenWRT and flash it with a special community-flavored version of OpenWRT based on [Gluon]. If there are other Freifunk nodes in reach, your router will mesh with them and connect you to the network. If you have an internet connection you want to share, then connect the WAN port of your router accordingly and become an uplink for other clients.
 
----
 ## Router build
 
-So far, so good .. now, for optimal signal strength, you might want to place your router outside, in front of your window, on your rooftop, you name it .. and this is why I put my TP-Link TL-WR841N into an outdoor case:
+So far, so good .. now, for optimal signal strength, you might want to place your router outside, in front of your window, on your rooftop, you name it .. and this is why I put my TP-Link TL-WR841N into an outdoor case. The following picture is an unrelated but similar installation in a Spelberg A-Box:
 
-![TL-WR841N in outdoor case](https://www.semjonov.de/content/images/2016/03/IMG_20160115_141825.jpg)
+![WiFi Tonne](wifitonne.jpg)
 
 I exploited the fact that there is a small DC-DC converter on the router's PCB and power it by passive power-over-ethernet, using one of Ubiquiti's 15V PoE injectors. That way, there is only a single cable coming out of the case. However, that also means that there is no second cable to connect my own devices to the LAN ports. Why would I want that? Well, currently my ISP does not provide me with an IPv6 address ...
 
----
 ## VLAN to the rescue
 
 Luckily, OpenWRT has support for VLAN tagging. This was my first use of virtual networks, so this might not be an optimal approach but hey, it works.

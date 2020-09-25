@@ -5,14 +5,21 @@ draft: false
 toc: true
 tags:
   - linux
-  - automation
+  - homelab
 ---
 
 _This is an update over my [earlier post] about PXE booting. I've learned a few more things and refined some rough edges._<br>
 
+{{< hint info >}}
+Update: By now I've learned even more. See [homelab/bootstrap]({{< ref "/docs/homelab/bootstrap.md" >}}) for an updated guide.
+{{< /hint >}}
+
 [earlier post]: {{< ref "/posts/2017/local-pxe-boot/index.md" >}}
 
+
 My Motivation is similar to the last post: I started building my homelab with virtual machines. Most of them are based on a minimal CentOS 7 installation, and as such I have a lot of very similar systems. Yes, I could probably use containers to great effect. But I prefer the separation/isolation that I get from virtual machines on ESXi.
+
+<!--more-->
 
 Since I don't want to spend my time clicking through the installation wizard each time and repeating all those steps, I use kickstart. And since all those machines need the same rpm packages, I might aswell configure a local mirror for all those updates.
 
@@ -20,9 +27,7 @@ The next logical step up would be a provisioning system like [Katello / the Fore
 
 [Katello / the Foreman]: https://theforeman.org/
 
-----
-
-# 1. Draft
+## 1. Draft
 
 - prepare a minimal CentOS 7.3 installation
 - plan your harddrive space! (~25 GB per architecture/version combination)
@@ -31,11 +36,11 @@ The next logical step up would be a provisioning system like [Katello / the Fore
 - download packages from a mirror
 - create kickstart configuration
 
-# 2. Setup
+## 2. Setup
 
 I don't think the first few steps need any explanation. Make sure you provision enough harddrive space and configure your network, either through a static IP address or through a DHCP reservation. Also make sure you know how to configure DHCP options in your router / DHCP server. I will be showing the settings in LEDE later.
 
-## 2.1 Install server packages
+### 2.1 Install server packages
 
 We need a TFTP server and some Syslinux packages. Those two enable booting kernels over the network. The CentOS mirrors provide appropriate images, which we will be using later. Furthermore, a simple HTTP server is required to serve our kickstart configuration and all the packages later.
 
@@ -48,7 +53,7 @@ This creates and populates the directories `/var/lib/tftpboot` and `/var/www/htm
 
 _Hint: take a look in `/etc/httpd/conf.d/welcome.conf` to disable the default Welcome page._
 
-## 2.2 Synchronize mirror
+### 2.2 Synchronize mirror
 
 Now would be a good time to select a fast mirror from the [mirrorlist](https://www.centos.org/download/mirrors/ List of CentOS mirrors), which also supports the `rsync` protocol.
 
@@ -96,7 +101,7 @@ Replace the `mirror="..."` assignment with your chosen mirror. You might want to
 
 Running the script will then create repositories under `/var/www/html/mirror/centos/7.3.1611/{os,updates}/x86_64/`.
 
-## 2.3 Configure TFTP server
+### 2.3 Configure TFTP server
 
 Point your DHCP clients to this mirror by specifying (at least) [options](http://www.networksorcery.com/enp/protocol/bootp/options.htm List of DHCP options) 67 and 150. I am using a router flashed with LEDE, so the options can be configured in a single field under `Network > DHCP and DNS > TFTP Settings`:
 
@@ -143,7 +148,7 @@ menu label  Kickstart: ^CentOS 7.3.1611
 
 Adjust `kbdmap` and the hostname in `menu title`, `kernel`, `initrd` and `append` lines to fit your network. If you left out the `ks=...` assignment in the `append`, you would boot into a minimal CentOS installer by default. To further automate the process we need to create this kickstart configuration next.
 
-## 2.4 Kickstart configuration
+### 2.4 Kickstart configuration
 
 Chances are, the Anaconda installer left a kickstart file in `/root/anaconda-ks.cfg`. If you used that file, the installer would create an identical installation to your mirror server.
 
@@ -228,7 +233,7 @@ This [answer on stackexchange.com](http://unix.stackexchange.com/a/76337) descri
 ```bash
 python -c'import crypt as c,getpass as p; print(c.crypt(p.getpass(),c.mksalt(c.METHOD_SHA512)))'
 ```
-## 2.5 Enable services
+### 2.5 Enable services
 
 Finally, enable the `tftp-server` and `httpd` services and open firewall ports:
 
@@ -238,7 +243,7 @@ firewall-cmd --permanent --add-service={tftp,http}
 firewall-cmd --reload
 ```
 
-## 2.6 Booting
+### 2.6 Booting
 
 You should now be greeted with a Pxelinux menu upon booting a new machine:
 

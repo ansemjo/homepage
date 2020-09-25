@@ -7,15 +7,15 @@ draft: false
 toc: false
 
 tags:
-  - virtual-machines
+  - homelab
   - security
 ---
-
-<!--more-->
 
 I used KeePassX to generate a new, 24 character password with all character types enabled. This was supposed to replace the default `ADMIN/ADMIN` combination for IPMI on my ESXi box. So I opened the appropriate page through a browser, navigated to `Configuration > Users` and modified the ADMIN user.
 
 It happily accepted the new password with no warning whatsoever and I logged out to test it .. oh well .. it didn't work.
+
+<!--more-->
 
 While poking around for a way to reset the password, I found this article: [Supermicro IPMI – password vulnerability](http://kbdone.com/supermicro-ipmi-password-vulnerability/). The mentioned port is closed in my firmware, so I've got that going for me. Reading on, I found out that IPMI truncates long passwords entered through the web administration page.
 

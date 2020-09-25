@@ -3,13 +3,8 @@ title: Behelfs-Mund-Nasen-Maske nähen
 description: Aus Baumwollstoff eine Behelfs-Mundbedeckung selber herstellen.
 date: 2020-03-27T13:34:07+01:00
 
-draft: false
-toc: true
-
 tags:
   - diy
-  - guide
-  - coronavirus
   - sewing
 ---
 

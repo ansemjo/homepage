@@ -4,7 +4,6 @@ date: 2016-02-16
 draft: false
 toc: false
 tags:
-  - ghost
   - systemd
   - linux
 ---

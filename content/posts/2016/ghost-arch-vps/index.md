@@ -5,7 +5,7 @@ draft: false
 toc: true
 tags:
   - linux
-  - ghost
+  - meta
 ---
 
 I recently got myself a small VPS from [Hetzner] to play around with. Using their 'rescue' function you can mount different installer images in the virtual disc drive and install the system via VNC or web console.
@@ -19,7 +19,7 @@ To me, Arch seemed like an interesting choice for a webserver and so I cloned my
 [nginx config]: https://git.semjonov.de/server/nginx-conf
 
 
-# Setting up Ghost
+## Setting up Ghost
 
 __Update:__ There is also a package for Ghost in the [AUR](https://aur.archlinux.org/packages/ghost/) which also includes a patch to enable use of node.js 6 early on, thus making most of this guide obsolete. Check the config sections for some intersting bits though.
 
@@ -27,7 +27,7 @@ At one point I needed to have an app served through a socket to try some approac
 
 _I assume you have a basic nginx config up and running at this point._
 
-## Create a seperate user
+### Create a seperate user
 
 I wanted proper priviledge separation for Ghost. That means running everything related to ghost under a seperate user with no superuser rights.
 
@@ -38,7 +38,7 @@ Create a new user with a new homedir and give the webserver read access:
 ```
 _(note that I set up nginx to run as user 'nginx' and with primary group 'webserver')_
 
-## Download Ghost
+### Download Ghost
 
 We will now log in as `ghostcms` and download the latest Ghost release. Being a superuser / root it goes something like this:
 
@@ -61,7 +61,7 @@ $ ls
 content  core  config.example.js  Gruntfile.js  index.js  LICENSE  npm-shrinkwrap.json  package.json  PRIVACY.md  README.md
 ```
 
-## Create your Ghost config
+### Create your Ghost config
 
 For production use, or if you want to configure Ghost to use a socket instead of the default localhost / port combination, you'll want to edit the default `config.example.js` in this folder and save it as `config.js`. There is some neat documentation [available]. We will just copy the example and edit it:
 
@@ -119,7 +119,7 @@ module.exports = config;
 
 Note the use of `socket: 'ghost.sock'` in the production server. Also, if you're going to configure an SMTP email account or mysql database access here, you might want to further restrict permissions on this file: `$ chmod 600 config.js`.
 
-## Install node.js
+### Install node.js
 
 Before running Ghost, we need to install `node` and `npm`.
 
@@ -145,7 +145,7 @@ This will take a while, as you are effectively building from source when you are
 $ npm install --production
 ```
 
-## Run Ghost
+### Run Ghost
 
 Now that everything is in place we can finally start Ghost:
 
@@ -159,7 +159,7 @@ We could now look at ["Deploying Ghost"] to make it run forever as a unit file i
 
 ---
 
-# Configure nginx
+## Configure nginx
 
 As I said above, I assume you already have a basic nginx configuration up and running. In fact, the Ghost devs have published very barebones [config] for nginx to run Ghost.
 
@@ -243,14 +243,14 @@ This concludes this installation. Have fun with Ghost! :)
 
 ---
 
-## Bonus: mysql + systemd file
+### Bonus: mysql + systemd file
 
 I now migrated my database and made this 'test setup' my main landing page now. This came with two important changes:
 
 * I use MariaDB as a database instead of SQLite.
 * Ghost needs to autostart, thus I'm using a systemd service for that.
 
-### MariaDB database
+## MariaDB database
 
 The necessary changes in Ghost's `config.js` are:
 ```
@@ -272,7 +272,7 @@ database: {
 Also add a mailing configuration and [privacy settings] to your liking.
 [privacy settings]: http://support.ghost.org/config/#privacy
 
-### systemd service
+## systemd service
 
 The necessary systemd service file can actually be found on [GitHub]. I use it with some slight modifications to account for my different user and workingdir:
 

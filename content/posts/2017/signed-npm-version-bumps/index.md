@@ -4,8 +4,7 @@ date: 2017-01-14
 draft: false
 toc: true
 tags:
-  - npm
-  - gpg
+  - security
 ---
 
 ## package.json

@@ -3,16 +3,14 @@ title: Speedtest Plotter
 description: running speedtest-cli with a cronjob and plotting the results
 date: 2018-09-19T20:51:03+02:00
 
-toc: true
-
 resources:
   - name: img:counter
     src: '**.png'
 
 tags:
-  - docker
-  - networks
-  - gnu
+  - container
+  - network
+  - database
 ---
 
 I am supposed to have a 500 Mbps internet line at home. Last week it really didn't feel like that
@@ -22,7 +20,7 @@ period of time.
 
 <!--more-->
 
-# speedtest-cli
+## speedtest-cli
 
 Everybody probably knows sites like [speedtest.net](http://www.speedtest.net/),
 [speedof.me](https://speedof.me/) and the
@@ -46,7 +44,7 @@ There are probably better tools out there, especially ones that measure your pin
 clogging the pipes to get ahold of phenomena like bufferbloat. But it's still great to get an idea
 about your connection.
 
-# rinse and repeat
+## rinse and repeat
 
 To collect some measurements over a long period of time, you'll need to run `speedtest-cli` in
 regular intervals. There are surely a number of ways to do that and the simplest would probably be
@@ -60,7 +58,7 @@ hours or days.
 
 You can find my project [on GitHub](https://github.com/ansemjo/speedtest-plotter).
 
-# what now?
+## what now?
 
 When you think you've had enough, run `docker logs` and look at your data.
 
@@ -103,7 +101,7 @@ with:
     plot for [col=7:8] "results.csv" using 4:col title col sm acspl, \
       '' using 4:6 title col axes x1y2 w points
 
-## examples
+### examples
 
 Save your results in `results.csv` and the above script in `plotscript`. Then run
 `gnuplot ./plotscript` and you'll be rewarded with a graph:
@@ -123,7 +121,7 @@ and on again?
 A-ha! So a router reboot 'fixed' my slow connection? This is just the beginning of my debugging
 effort but visualizing the data definitely helped.
 
-# the project
+## the project
 
 I'll let the Docker container run for now. In the meantime you can take a look at the GitHub
 repository of this project:

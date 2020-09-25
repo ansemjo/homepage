@@ -4,13 +4,12 @@ date: 2016-05-16
 draft: false
 toc: true
 tags:
-  - mdadm
   - linux
-  - raid
+  - homelab
   - encryption
 ---
 
-# 1 Introduction
+## Introduction
 
 ### Some context
 I have a NAS at home which runs on Debian Jessie. A NAS wouldn't be a NAS without some storage, so I put in two disks with 4 TB each when I built it. Those two disks have actually been used in a setup with [OpenMediaVault] before that and already had a software-RAID on them. When migrating the disks (to Ubuntu at first) I learned about [mdadm] and that OpenMediaVault uses it. Great, that was a rather painless transition!
@@ -43,7 +42,7 @@ _Nevermind the sorting .. I must have switched some cables when I put in the new
 
 We see a software-RAID with level 1 on across two partitions `sdc1` and `sde1`. On top of that is a dm-crypt device using [LUKS encryption] mode, which is then formatted with ext4 and mounted at `/mnt/arr`.
 
-# 2 Preparation
+## Preparation
 
 ### Replicate the partitioning layout
 
@@ -84,7 +83,7 @@ That would require two re-synchronizations if you want to make sure to have a wo
 
 This is definitely the cleanest approach, is a function of mdadm itself since version 3.-something and you can just keep using your array without worrying about inconsistent states between old and new array. It requires two reshaping operations though because it is not currently possible to go from RAID 1 to RAID 6 directly. So that's what we're going to do.
 
-# 3 Let's do it
+## Let's do it
 
 ### Add the new disks as spares
 
@@ -213,6 +212,6 @@ For a `btrfs` filesystem you actually have to do the resizing while the device i
 # btrfs filesystem resize max /mnt/arr
 ```
 
-# 4 Conclusion
+## Conclusion
 
 _Right now, the second reshaping is in progress and it looks like it might take up to three days again._

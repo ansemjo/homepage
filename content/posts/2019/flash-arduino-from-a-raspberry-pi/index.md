@@ -3,13 +3,10 @@ title: Flash Arduino without a Bootloader from a Raspberry Pi
 description: use the GPIO pins of a Raspberry Pi to flash Arduino boards without a bootloader
 date: 2019-11-06T21:19:56+01:00
 
-draft: false
-toc: false
-
 tags:
   - linux
+  - electronics
   - arduino
-  - development
 ---
 
 To keep things short: I've had an [Anet A8](https://all3dp.com/1/anet-a8-3d-printer-review-diy-kit/)
@@ -23,13 +20,17 @@ Pi instead?
 
 <!--more-->
 
-**Update:** I found out that you can also use FTDI breakout boards like the
+## FT232H Update
+
+I found out that you can also use FTDI breakout boards like the
 [SparkFun FT232RL][sparkfun] or [Adafruit FT232H][adafruit]. The drivers come
 preinstalled on Linux. I've documented the cabling and configuation [in my wiki][wiki].
 
 [sparkfun]: https://www.sparkfun.com/products/12731 "SparkFun USB to Serial Breakout - FT232RL"
 [adafruit]: https://www.adafruit.com/product/2264 "Adafruit FT232H Breakout - General Purpose USB to GPIO+SPI+I2C"
-[wiki]: https://ansemjo.github.io/wiki/tips/arduino.html "Arduino Tips - ansemjo's docs"
+[wiki]: {{< ref "/docs/tips/arduino.md" >}} "Arduino Tips - ansemjo's docs"
+
+## GPIOs on a Raspberry Pi
 
 Luckily I purchased a Raspberry Pi Zero W shortly before and I've quickly found
 configuration examples how to use GPIO pins to program an Arduino. Most examples
@@ -61,6 +62,8 @@ permanent cable if you like, too.
 I powered the Anet board externally with its usual power supply. Do not attempt
 to connect the 5V pin to your Raspberry Pi. You'll likely just draw too much
 current and shut your Pi down.
+
+## avrdude Configuration
 
 When everything is connected, install `avrdude` and append the following to the
 global configuration file in `/etc/avrdude.conf`:

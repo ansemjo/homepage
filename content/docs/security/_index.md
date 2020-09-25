@@ -1,5 +1,5 @@
 ---
-title: Information Security
+title: Security
 weight: 80
 
 bookFlatSection: no
