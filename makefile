@@ -27,7 +27,7 @@ new :
 .PHONY: deploy
 deploy : HOST := muliphein.semjonov.de
 deploy : rebuild
-	ansible-playbook -i $(HOST), -u ansible deploy.yml
+	ansible-playbook -i $(HOST), -u root deploy.yml
 
 # run hugo to build public site
 public/index.html : themes/$(THEME)/.git $(shell find content/ -type f) config.*
