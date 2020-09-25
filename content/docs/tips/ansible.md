@@ -1,6 +1,11 @@
+---
+title: Ansible
+weight: 10
+---
+
 # Ansible
 
-## Inline Vault usage
+## Inline Vault
 
 The [Ansible vault] can encrypt your secrets so you can add them to your inventory files and track
 those in your preferred version control system.
@@ -9,12 +14,12 @@ those in your preferred version control system.
 
 Since version 2.3, Ansible allows using encrypted values inline in an otherwise unencrypted file.
 
-### Create key
+### Create Key
 
 In a simple setup with a single user you my want to use a password file with a high-entropy secret
 inside. Just don't add that to any VCS.
 
-```shell
+```sh
 $ high-entropy-password-gen > ~/.ansible/vaultkey
 
 # e.g. my diceware words alias:
@@ -23,17 +28,17 @@ $ words 10 - > ~/.ansible/vaultkey
 
 Edit your `ansible.cfg` to use that key without prompting:
 
-```ini
+```cfg
 # If set, configures the path to the Vault password file as an alternative to
 # specifying --vault-password-file on the command line.
 vault_password_file = ~/.ansible/vaultkey
 ```
 
-### Encrypt secret values
+### Encrypt Secrets
 
 Then use `ansible-vault encrypt_string` to encrypt your secrets:
 
-```shell
+```
 $ echo mysecret | ansible-vault encrypt_string
 Reading plaintext input from stdin. (ctrl-d to end input)
 !vault |
@@ -46,16 +51,17 @@ Reading plaintext input from stdin. (ctrl-d to end input)
 Encryption successful
 ```
 
+{{< hint info >}}
 If your secret is in the clipboard and my aliases are installed, a `clipboard` pipe works great:
-
-```shell
+```
 $ clipboard | ansible-vault encrypt_string | clipboard
 ```
+{{< /hint >}}
 
 Finally paste the encrypted secret in your inventory or variable file:
 
 ```yaml
-[...]
+# ...
         runner.rz.semjonov.de:
           ansemjo_gitlab_runner_registration_token: !vault |
             $ANSIBLE_VAULT;1.1;AES256
@@ -65,5 +71,5 @@ Finally paste the encrypted secret in your inventory or variable file:
             6333393837336665650a343738646135323235323331306630333465303535363530653435383532
             35633834666138373661336436363963363766393236336536306134653136343064
           ansemjo_gitlab_runner_registration_url: https://git.rz.semjonov.de/
-[...]
+# ...
 ```

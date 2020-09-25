@@ -1,4 +1,9 @@
-# Gitlab
+---
+title: GitLab
+weight: 10
+---
+
+# GitLab
 
 ## Gitlab Runner in QEMU/KVM
 
@@ -13,18 +18,21 @@ Then deploy the Gitlab Runner as a Docker container itself. Following the
       gitlab/gitlab-runner:alpine
     docker exec -it runner register
 
-!!! hint
-    You may need to install your CA certificate both on the CoreOS VM as well as in the
-    runner configuration first:
+{{< hint warning >}}
+You may need to install your CA certificate both on the CoreOS VM as well as in the
+runner configuration first:
 
-        scp /etc/ipa/ca.crt runner:
-        ssh runner
-        sudo mv ca.crt /etc/ssl/certs/my-ca.pem
-        sudo update-ca-certificates
-        sudo mkdir -p /etc/gitlab-runner/certs
-        sudo cp /etc/ssl/certs/my-ca.pem /etc/gitlab-runner/certs/ca.crt
+```sh
+scp /etc/ipa/ca.crt runner:
+ssh runner
+sudo mv ca.crt /etc/ssl/certs/my-ca.pem
+sudo update-ca-certificates
+sudo mkdir -p /etc/gitlab-runner/certs
+sudo cp /etc/ssl/certs/my-ca.pem /etc/gitlab-runner/certs/ca.crt
+```
 
-    Reboot the VM and/or restart the Docker service afterwards.
+Reboot the VM and/or restart the Docker service afterwards.
+{{< /hint >}}
 
 ## Gitlab API
 

@@ -1,7 +1,13 @@
-!!! note
-    This page needs tidying up.
+---
+title: Network Booting
+weight: 10
+---
 
 ## Network Booting
+
+{{< hint warning >}}
+TODO: This page probably needs to be tidied up.
+{{< /hint >}}
 
 ### Combined DHCP responses
 
@@ -77,9 +83,35 @@ ExecStart=/usr/bin/rkt run \
 WantedBy=multi-user.target
 ```
 
+Important bits are probably `--net host` and the `userclass`, `pxe-service` and `dhcp-range` stuff in dnsmasq's options.
+
+I also needed to build two iPXE binaries:
+
+- `undionly.kpxe` (bios -> ipxe)
+- `ipxe.efi` (uefi -> ipxe)
+
+With these two files in place in `/var/tftp` the following seems to work:
+
+```
+dnsmasq -d -q --port 0 \
+  --dhcp-range=172.26.63.0,proxy --enable-tftp --tftp-root=/var/tftp \
+  --dhcp-userclass=set:ipxe,iPXE \
+  --pxe-service=tag:#ipxe,x86PC,"chainload bios --> ipxe",undionly.kpxe \
+  --pxe-service=tag:ipxe,x86PC,"load menu",http://boot.rz.semjonov.de/ks/menu.ipxe \
+  --pxe-service=tag:#ipxe,BC_EFI,"chainload bc_efi --> ipxe",ipxe.efi \
+  --pxe-service=tag:ipxe,BC_EFI,"load menu",http://boot.rz.semjonov.de/ks/menu.ipxe \
+  --pxe-service=tag:#ipxe,x86-64_EFI,"chainload efi --> ipxe",ipxe.efi \
+  --pxe-service=tag:ipxe,x86-64_EFI,"load menu",http://boot.rz.semjonov.de/ks/menu.ipxe
+```
+
+{{< hint info >}}
+Add `--log-dhcp` to get more verbose information about served DHCP requests.
+{{< /hint >}}
+
+
 ## Bootstrap Process
 
-This is an overview of the necessary procedures to bootstrap the entire Rechenzentrum�:
+This is an overview of the necessary procedures to bootstrap the entire Rechenzentrum:
 
 - bootstrap the network boot target 'matchbox'
   - boot and install CoreOS to disk
@@ -176,7 +208,9 @@ refresh_pattern .	0	20%	4320
 \/([0-9\.\-]+)\/([a-z]+)\/(x86_64|i386)\/(.*\.d?rpm)	http://rpmcache.squid.internal/$1/$2/$3/$4
 ```
 
-**Note:** the `storeid.db` rules need **tabs** as whitespace, not spaces! And during initial creation I found out that squid sends a *quoted* string to the helper, so using any regular expression with `(.*\.rpm)$` at the end did not match. Use `debug_options ALL,5` and grep for `storeId` if you're having problems.
+{{< hint danger >}}
+The `storeid.db` rules need **tabs** as whitespace, not spaces! And during initial creation I found out that squid sends a *quoted* string to the helper, so using any regular expression with `(.*\.rpm)$` at the end did not match. Use `debug_options ALL,5` and grep for `storeId` if you're having problems.
+{{< /hint >}}
 
 Finally, simply add `proxy=http://url.to.your.proxy:3128` in your clients' `/etc/yum.conf`.
 

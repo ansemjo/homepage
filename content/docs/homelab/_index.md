@@ -1,8 +1,7 @@
 ---
-title: Information Security
-weight: 80
+title: Homelab
+weight: 70
 
 bookFlatSection: no
 bookCollapseSection: yes
 ---
-

@@ -1,3 +1,8 @@
+---
+title: Docker in QEMU/KVM
+weight: 90
+---
+
 # Docker in QEMU/KVM
 
 Some applications may require a properly isolated Docker engine where users of the API have every freedom but when they must not be able to compromise the host security. Since access to the Docker socket is equivalent to being `root` ([or worse](https://opensource.com/article/18/10/podman-more-secure-way-run-containers)) we must preferably run the engine on a seperate machine.
@@ -16,8 +21,9 @@ First of all, we need to prepare our hypervisor, so install QEMU and libvirt.
 
 Make sure you have hardware virtualization available. If you're running in a virtual machine already you may need to enable passthrough explicitly. On an Intel machine you should have a module `kvm_intel` loaded as well.
 
-!!! info
-    We are going to use `virt-install` as well, however the version in EPEL is not recent enough to use the `kernel=` and`initrd=` arguments with `--location`. Thus prefer a local manager and append `--connect qemu+ssh://root@hypervisor/system` to `virsh` or `virt-install` commands.
+{{< hint info >}}
+We are going to use `virt-install` as well, however the version in EPEL is not recent enough to use the `kernel=` and`initrd=` arguments with `--location`. Thus prefer a local manager and append `--connect qemu+ssh://root@hypervisor/system` to `virsh` or `virt-install` commands.
+{{< /hint >}}
 
 ## Boot a CoreOS Virtual Machine
 
@@ -45,8 +51,9 @@ If you prefer to download and verify [an ISO](https://stable.release.core-os.net
 
 This is useful when you're doing many installs to avoid the repeated downloads.
 
-!!! hint
-    You can find files inside an ISO with `isoinfo -Jf -i /path/to/disc.iso`.
+{{< hint info >}}
+You can find files inside an ISO with `isoinfo -Jf -i /path/to/disc.iso`.
+{{< /hint >}}
 
 ### Via Text Console (older `virt-install`)
 
@@ -113,9 +120,10 @@ This should start the installation process and enable a VNC console. You can che
 
 Connect with your favourite VNC client and complete the installation.
 
-!!! hint
-    You can't currently change the keyboard map on the console. Set a password with
-    `sudo passwd core` and connect with `ssh` instead if you run into problems.
+{{< hint info >}}
+You can't currently change the keyboard map on the console. Set a password with
+`sudo passwd core` and connect with `ssh` instead if you run into problems.
+{{< /hint >}}
 
 ## Install CoreOS to Disk
 

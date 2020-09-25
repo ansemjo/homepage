@@ -1,6 +1,6 @@
 ---
-menu: after
-weight: 10
 title: Blog
+menu: before
+weight: 10
 ---
 

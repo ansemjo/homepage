@@ -1,6 +1,11 @@
+---
+title: CentOS
+weight: 10
+---
+
 # CentOS
 
-## Custom post-transaction hooks
+## Custom post-transaction Hooks
 
 Yum allows executing custom scripts with a post-action plugin. For that you
 need to first install the plugin and then drop your actions in

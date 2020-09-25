@@ -1,3 +1,10 @@
+---
+title: Arduino / AVR
+weight: 10
+---
+
+# Arduino / AVR
+
 ## Flashing over ISP header
 
 Recently I had the need to program an Arduino that was not responding over USB,

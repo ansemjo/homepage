@@ -1,14 +1,17 @@
+---
+title: Backblaze
+weight: 10
+---
+
 # Backblaze
 
-## Manually Sync
+## Manually Sync Gitlab Backups
 
 For example to additionally store my GitLab backups on Backblaze:
 
 - move all relevant files to a folder
 - (optionally) encrypt all files
 - run `b2 sync . b2://bucketname/`
-
-### GitLab Backups
 
 My GitLab backups are currently stored in a Minio S3 object storage with WORM activated but files
 can still be deleted by accident from the server itself. A naiive workflow would look like this:

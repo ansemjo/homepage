@@ -1,8 +1,8 @@
-+++
-title = "Tips"
-weight = 10
+---
+title: Tips
+weight: 10
 
-bookFlatSection = true
-bookCollapseSection = true
-+++
+bookFlatSection: no
+bookCollapseSection: yes
+---
 

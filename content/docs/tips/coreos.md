@@ -1,11 +1,20 @@
+---
+title: CoreOS
+weight: 10
+---
+
 # CoreOS
 
-Various tricks for the super slim container OS.
+{{< hint danger >}}
+[CoreOS is deprecated.](https://coreos.com/os/eol/) I've played with its successor
+Fedora CoreOS but I'm not sure how easily these tips translate to it.
+{{< /hint >}}
 
 ## QEMU Guest Agent
 
-The guest agent `qemu-ga` is required for the host to discover the virtual machine's network setup,
-specifically it's IP. You can start the guest agent in an Alpine container:
+When CoreOS is running in a virtual machine, the guest agent `qemu-ga` is required
+for the host to discover the machine's network setup, specifically it's IP.
+You can start the guest agent in an Alpine container:
 
 ```sh
 docker run -d \

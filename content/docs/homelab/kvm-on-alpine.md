@@ -1,3 +1,8 @@
+---
+title: KVM on Alpine Linux
+weight: 70
+---
+
 # KVM on Alpine
 
 Installing a KVM hypervisor with absolutely minimal footprint:
@@ -19,8 +24,9 @@ Reboot or just load necessary kernel modules:
 
     modprobe kvm-intel br_netfilter
 
-!!! hint
-    `br_netfilter` is required for the network bridge below.
+{{< hint info >}}
+`br_netfilter` is required for the network bridge below.
+{{< /hint >}}
 
 ## Bridge Interface
 

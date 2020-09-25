@@ -1,9 +1,17 @@
+---
+title: BIOS Updates
+weight: 10
+---
+
 # BIOS Updates
+
+Methods to update the BIOS / UEFI on various platforms.
 
 ## Lenovo Laptops from Linux
 
-Some modern Lenovo machines do not have an optical disc drive. The only option
-for machines without Windows is a bootable .iso image though. What now?
+Some modern Lenovo machines do not have an optical disc drive, yet only get Windows
+installers or bootable `*.iso` files, which *can not* be directly written to USB sticks.
+What now?
 
 Turns out inside that image there is another bootable format: an El Torito
 image. You can extract that with a script called
@@ -24,9 +32,10 @@ Image has been written to file "n10ur17w-usb.img".
 24117248 bytes (24 MB, 23 MiB) copied, 0.354471 s, 68.0 MB/s
 ```
 
-!!!note
-    This information and script is taken from
-    [thinkwiki.de](http://thinkwiki.de/BIOS-Update_ohne_optisches_Laufwerk_unter_Linux)
+{{< hint info >}}
+This information and script is taken from
+[thinkwiki.de](http://thinkwiki.de/BIOS-Update_ohne_optisches_Laufwerk_unter_Linux)
+{{< /hint >}}
 
 ## Supermicro Boards via IPMI
 

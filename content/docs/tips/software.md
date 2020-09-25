@@ -1,4 +1,11 @@
+---
+title: Software
+weight: 10
+---
+
 # Software
+
+A few links to useful software.
 
 ## Collaboration
 
@@ -27,6 +34,7 @@ An overview of archival software for different purposes.
 
 | Name       | Server              | Client                | OCR       | Notes                                                                                                  |
 | :--------- |:-------------------:|:---------------------:|:---------:| ------------------------------------------------------------------------------------------------------ |
+| Docspell   | Docker              | Web                   | yes       | https://github.com/eikek/docspell
 | mayanEDMS  | Docker              | Web                   | yes       | not sure why I initially dismissed this .. beautiful, has OCR, easily installed with docker-compose .. |
 | ecodms     | Debian / Docker     | Web / Windows / Linux | yes       | not very pretty; simple installation                                                                   |
 | logicalDoc | Docker              | Web                   | not in CE | nice feature set and relatively easy to set up; lacks OCR in community edition                         |

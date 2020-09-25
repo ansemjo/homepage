@@ -1,4 +1,9 @@
-# Git
+---
+title: git
+weight: 10
+---
+
+# git
 
 ## Prevent commits on a branch
 
@@ -39,8 +44,9 @@ repository into a `frontend` subdirectory .. etc.
  [...]
 ```
 
-!!! hint
-    Don't forget about dotfiles, as those are not moved with `mv !(frontend) frontend/` alone.
+{{< hint danger >}}
+Don't forget about hidden files, as those are not moved by `mv !(frontend) frontend/`.
+{{< /hint >}}
 
 Do the same analogously for the `backend` or any other repository you want to merge.
 

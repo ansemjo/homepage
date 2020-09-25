@@ -1,6 +1,17 @@
+---
+title: OpenWRT
+weight: 10
+---
+
 # OpenWRT
 
 ## [Image Builder](https://openwrt.org/docs/guide-user/additional-software/imagebuilder)
+
+{{< hint info >}}
+### Update
+I wrote [openwrtbuilder](https://github.com/ansemjo/openwrtbuilder) to automate
+these steps for arbitrary configurations, so I can quickly build a new custom firmware.
+{{< /hint >}}
 
 > The Image Builder (previously called the Image Generator) is a pre-compiled environment
 > suitable for creating custom images without the need for compiling them from source.
@@ -20,6 +31,3 @@ You can include extra packages by configuring `PACKAGES=`.
 
 The result will be stored in `./bin/targets/<target>/<type>/`.
 
-!!! link
-    I wrote a [small script](https://git.rz.semjonov.de/snippets/14) to automate
-    these steps for my Archer C7 v2, so I can quickly build a new snapshot firmware.

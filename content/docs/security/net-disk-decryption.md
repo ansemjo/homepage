@@ -1,6 +1,11 @@
+---
+title: Network Disk Decryption
+weight: 20
+---
+
 # Network Disk Decryption
 
-Recently RedHat 7.4 introduced the possibility to bind your encrypted disks to a
+Red Hat 7.4 introduced the possibility to bind your encrypted disks to a
 network presence. It is called [Network-Bound Disk Encryption][NBDE]
 and uses the projects [tang](https://github.com/latchset/tang) and
 [clevis](https://github.com/latchset/clevis).

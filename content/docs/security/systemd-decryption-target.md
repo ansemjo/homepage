@@ -1,3 +1,8 @@
+---
+title: Systemd Decryption Target
+weight: 20
+---
+
 # Systemd Disk Decryption Target
 
 In order to delay most of your systems services during boot until a bunch of harddisks are decrypted
@@ -49,8 +54,9 @@ done
 
 And add any services that you might require to be able to login via `ssh`:
 
-!!! warning
-    Do not forget required networking services!
+{{< hint danger >}}
+Do not forget required networking services!
+{{< /hint >}}
 
 ```
 ln -s /usr/lib/systemd/system/sshd.service
@@ -77,17 +83,19 @@ Requires=unlockme.target \
   systemd-cryptsetup@WDC_WD40EZRX\x2d00SPEB0_WD\x2dWCC4E0496927_LUKS.service
 ```
 
-!!! hint
-    Remember to escape any names which might contain special characters in systemd's sense, i.e.
-    run names though `systemd-escape` first.
+{{< hint warning >}}
+Remember to escape any names which might contain special characters in systemd's sense, i.e.
+run names though `systemd-escape` first.
+{{< /hint >}}
 
-!!! note
-    I needed a little override in `/etc/systemd/system/systemd-cryptsetup@.service.d/dependencies.conf`
-    to make sure that this target properly waits for all `systemd-cryptsetup@***.service` units without
-    specifying them all in `After=` manually:
+{{< hint info >}}
+I needed a little override in `/etc/systemd/system/systemd-cryptsetup@.service.d/dependencies.conf`
+to make sure that this target properly waits for all `systemd-cryptsetup@***.service` units without
+specifying them all in `After=` manually:
 
-        [Unit]
-        DefaultDependencies=yes
+    [Unit]
+    DefaultDependencies=yes
+{{< /hint >}}
 
 ### `continue.service`
 
@@ -122,6 +130,7 @@ systemctl start continue
 
 You should be asked to enter the passwords on the commandline directly.
 
-!!! hint
-    If you have trouble booting after any changes, apped `init=/sysroot/bin/sh` to your kernel
-    commandline!
+{{< hint info >}}
+If you have trouble booting after any changes, apped `init=/sysroot/bin/sh` to your kernel
+commandline!
+{{< /hint >}}

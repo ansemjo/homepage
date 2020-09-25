@@ -1,4 +1,10 @@
+---
+title: Containers
+weight: 10
+---
+
 # Containers
+
 
 ## Docker Firewalling
 
@@ -30,7 +36,9 @@ Or using raw `iptables` rules:
     -A FORWARD -i docker0 -o eth0 -j ACCEPT
     -A FORWARD -i eth0 -o docker0 -j ACCEPT
 
-## Full systemd in container
+
+
+## Full Systemd Inside a Container
 
 Podman introduced some fixes that enable you running a full systemd init process inside of
 a **rootless** container. That way you can start a normal CentOS image with

@@ -1,22 +1,26 @@
-# Secureboot
+---
+title: Secure Boot
+weight: 10
+---
 
-These are guides to install your system with your own secureboot keys and enforce
+# Secure Boot
+
+These are guides to install your system with your own Secureboot keys and enforce
 signed Linux kernels.
 
 ## Tools
 
-Some useful tools for this job:
+Some useful tools I wrote for this job:
 
-| name | description |
-|:----:|:----------- |
-| [`ansemjo/mkefikeys`](https://github.com/ansemjo/mkefikeys) | generate signing keys |
-| [`ansemjo/mksignkernels`](https://github.com/ansemjo/mksignkernels) | bundle and sign kernel images |
+* [`ansemjo/mkefikeys`](https://github.com/ansemjo/mkefikeys): generate signing keys
+* [`ansemjo/mksignkernels`](https://github.com/ansemjo/mksignkernels): bundle and sign kernel images
 
 ## Guides
 
 ### Arch Linux
 
-TODO
+My main system is running Arch in this configuration but I haven't done a writeup
+for it yet ..
 
 ### Fedora
 
@@ -57,8 +61,9 @@ Copy files required for installation to the unencrypted ESP:
 
 Installing them in your firmware is out of the scope of this entry.
 
-!!! warning
-	Do not enable Secureboot yet. We haven't signed anything yet and your system will fail to boot.
+{{< hint danger >}}
+Do not enable Secureboot yet. We haven't signed anything yet and your system will fail to boot.
+{{< /hint >}}
 
 #### Sign your kernels
 

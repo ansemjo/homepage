@@ -89,7 +89,7 @@ after a short microsecond delay the direction is switched and some dead time is 
 effective output voltage. This approach was detailed in one of the previous builds. Two pairs are used
 in order to stay within the ATmega328P's maximum current specifications per pin.
 
-<video controls loop autoplay muted>
+<video controls loop autoplay muted style="width: 100%;">
   <source src="filament_ac.mp4" type="video/mp4">
 </video>
 

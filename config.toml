@@ -1,4 +1,4 @@
-title = "semjonov.de"
+title = "ansemjo"
 theme = "book"
 baseUrl = "https://semjonov.de/"
 
@@ -6,22 +6,18 @@ paginate = 8
 enableGitInfo = true
 rssLimit = 20
 
-pygmentsUseClasses = true
-pygmentsCodefences = true
-pygmentsCodefencesGuessSyntax = true
-
 [params]
   author = "Anton Semjonov"
   license = "licensed under [Creative Commons BY-SA 4.0](/license)"
 
-  BookTheme = "auto"
+  BookTheme = "light"
   BookToC = true
   BookRepo = "https://github.com/ansemjo/blog"
   BookEditPath = "edit/master/content"
   BookDateFormat = "January 2, 2006"
   BookSearch = true
   BookComments = false
-  BookPortableLinks = true
+  BookPortableLinks = false
 
 [taxonomies]
   tag = "tags"
@@ -33,8 +29,15 @@ pygmentsCodefencesGuessSyntax = true
   fractions = false
   noreferrerLinks = true
 
-[markup.tableOfContents]
-  startLevel = 2
+[markup]
 
-[markup.goldmark.renderer]
-  unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    style = "monokailight"
+
+  [markup.tableOfContents]
+    startLevel = 2
+
+  [markup.goldmark.renderer]
+    unsafe = true

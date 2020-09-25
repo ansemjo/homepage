@@ -1,5 +1,6 @@
 ---
 title: ZFS in-place Encryption
+weight: 30
 ---
 
 # ZFS in-place Encryption
@@ -112,5 +113,6 @@ Useful pointers:
 - `After=`, `RequiredBy=`/`WantedBy=` and `BindsTo=` properties of services
 - [systemd.unit(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)
 
-!!! note
-    See [Systemd Decryption Target](systemd-decryption-target.md) for the finished result.
+{{< hint info >}}
+See [Systemd Decryption Target]({{< ref "systemd-decryption-target.md" >}}) for the finished result.
+{{< /hint >}}
