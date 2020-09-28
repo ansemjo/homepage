@@ -5,6 +5,7 @@ weight: 10
 
 # git
 
+
 ## Prevent commits on a branch
 
 You can use a `pre-commit` hook to check the branch name to which you are commiting your changes. If
@@ -19,6 +20,8 @@ you want to prevent direct changes to `master` create the following `.git/hooks/
 ```
 
 Make sure the hook script is executable.
+
+
 
 ## Merge Repositories
 
@@ -99,3 +102,37 @@ You will end up with a repository where history looks somewhat like this:
 | [...]
 * b0605af 2019-02-19 11:25:36 +0100 N prepare combined repository for project [Anton Semjonov]
 ```
+
+
+
+## Mirror a Repository
+
+You can add pre- or post-receive [hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to bare
+repositories, which are executed whenever new commits are pushed. My original usecase was for my local
+GitLab installation to mirror everything to publicly available GitHub repositories. GitLab now provides this
+option in its Web interface.
+
+The gist is this:
+
+* Grant access to the `git` user via [deploy keys](https://developer.github.com/guides/managing-deploy-keys/#machine-users) on GitHub
+* Add the GitHub repository as a remote to the bare repository
+* Add a `post-receive` hook to mirror any changes
+
+Granting access is a little bit out of the scope here but should be easily achievable with the above link.
+You can check the access with `sudo -u git ssh git@github.com`.
+
+Then find the directory of the bare repository on your local machine. Copy the link to your public
+repository and add it as a remote:
+
+```
+git remote add --mirror=push mirror git@github.com:username/mirror.git
+```
+
+Finally add the following script as `post-receive` in `hooks/` and mark it executable:
+
+```
+#!/bin/sh
+exec git push --quiet "mirror" &
+```
+
+Now, every time you push to your local repository this script is executed and the repository will be mirrored.
