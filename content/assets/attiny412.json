@@ -1,0 +1,29 @@
+{
+  "build": {
+    "core": "arduino",
+    "extra_flags": "",
+    "f_cpu": "3333333L",
+    "hwids": [],
+    "mcu": "attiny412"
+  },
+  "bootloader": {
+    "SYSCFG0": "0xC9", 
+    "file": "atmega4809_uart_bl.hex",
+    "fuses_file": "fuses_4809.bin",
+    "BOOTEND": "0x00", 
+    "OSCCFG": "0x01"
+  },
+  "frameworks": [
+    "arduino"
+  ],
+  "name": "Microchip ATtiny412",
+  "url": "https://www.microchip.com/wwwproducts/en/ATtiny412",
+  "vendor": "Microchip",
+  "upload": {
+    "maximum_ram_size": 256,
+    "maximum_size": 4096,
+    "require_upload_port": true,
+    "speed": 115200,
+    "use_1200bps_touch": false
+  }
+}

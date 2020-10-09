@@ -5,6 +5,97 @@ weight: 10
 
 # Arduino / AVR
 
+## TinyAVR-0/1 Programming
+
+I bought a couple of ATtiny412 Microcontrollers as a replacement for the trusty ATtiny85 parts
+that I liked to use for small projects before. Sadly, it is not available in DIP packages
+anymore but it also has only 8 pins.
+
+Because I have programmed the new Arduino Nano Every and even a bare ATmega4809 chip before,
+I knew that there is some form of support in the Arduino suite and/or in PlatformIO.
+
+### UPDI Programmer
+
+Programming is done over a new protocol, called UPDI. You can flash an ATmega328P to be an
+`avrdude`-compatible translator .. or you can simply build a very simple programming cable and
+use any serial adapter. All you need to do is connect RX and TX with a resistor in series with
+TX:
+
+```
+Serial            Device
+
+  TX╶─╴4.7kΩ╶─╮
+              ├──╴UPDI
+  RX╶─────────╯
+
+```
+
+This cable can be used with [`pyupdi.py`](https://github.com/mraardvark/pyupdi) or
+[`updiprog`](https://github.com/Polarisru/updiprog).
+
+### Blink Example with `avr-gcc` Compiler Toolchain
+
+The source code for a minimal blink example looks somewhat like this:
+
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define PIN 1
+#define PERIOD 1000
+
+int main(void) {
+  PORTA.DIRSET = 1 << PIN;
+  for (;;) {
+    PORTA.OUTSET = 1 << PIN;
+    _delay_ms(PERIOD);
+    PORTA.OUTCLR = 1 << PIN;
+    _delay_ms(PERIOD);
+  }
+}
+```
+
+In order to compile this for the `avrxmega3` target, you'll need to get a compatible compiler
+toolchain first. My version of `avr-gcc` did know about the target and recognized the
+`-mmcu=attiny412` argument – however compilation failed because support was missing in my
+copy of `avr-libc`. An [article by Omzlo](https://www.omzlo.com/articles/baremetal-programming-on-the-tinyavr-0-micro-controllers#software) ([archive](https://archive.is/XvvRh))
+describes the entire process in a little more detail, including how to get the necessary device
+pack files from Microchip. Being an Arch Linux user, I simply installed
+[`avr-libc-avrxmega3-svn`](https://aur.archlinux.org/packages/avr-libc-avrxmega3-svn/), which
+adds support for `avrxmega3` by applying a [patch](https://file.savannah.nongnu.org/file/avrxmega3-v10.diff.xz?file_id=48974)
+during compilation.
+
+With this toolchain you can use a build process like this:
+
+```bash
+GCC_ARGS=(-mmcu=attiny412 -DF_CPU=3333333L -Os)
+avr-gcc "${GCC_ARGS[@]}" -c blink.c -o blink.o
+avr-gcc "${GCC_ARGS[@]}" blink.o -o blink.elf
+avr-objcopy -O ihex -R .eeprom blink.elf blink.hex
+updiprog -d tiny41x -c /dev/ttyUSB0 -e -w blink.hex
+```
+
+### Adding Baremetal Support in PlatformIO
+
+Support can also be added to PlatformIO with a custom board definition and a modified
+`upload_command`. The compiler toolchain that is used for the `atmelmegaavr` platform
+already has support for this family because they are very similar to the Arduino Nano
+Every and ATmega4809 mentioned above.
+
+Add the file [`attiny412.json`](/assets/attiny412.json) in a subdirectory `boards/` of
+your PlatformIO project and use `board = attiny412` in the config file along with a
+new `upload_command`:
+
+```ini
+[env:tinyavr]
+platform = atmelmegaavr
+board = attiny412
+upload_command = updiprog -d tiny41x -c $UPLOAD_PORT -b $UPLOAD_SPEED -e -w $SOURCE
+```
+
+It should be trivial to adjust the board definition for other microcontrollers in the
+same family.
+
 ## Flashing over ISP header
 
 Recently I had the need to program an Arduino that was not responding over USB,
