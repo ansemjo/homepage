@@ -2,28 +2,33 @@
 ---
 
 - hosts: all
+  gather_facts: no
   become: yes
-
   vars:
-
     webroot: /srv/www/semjonov.de
+
+  handlers:
+
+    - name: restorecon
+      shell: 'restorecon -R -v "{{ webroot }}"'
 
   tasks:
 
-    - name: nginx and ansible are installed
+    - name: packages are installed
+      tags: [ install ]
       yum:
-        name:
-          - nginx
-          - rsync
+        name: [ nginx, rsync ]
         state: present
 
     - name: selinux file context definition present
+      tags: [ install ]
       sefcontext:
         target: "{{ webroot }}(/.*)?"
         setype: httpd_sys_content_t
         state: present
 
     - name: webroot directory created
+      tags: [ install ]
       file:
         path: "{{ webroot }}"
         state: directory
@@ -32,7 +37,8 @@
         mode: 0755
       notify: restorecon
 
-    - name: built files are synchronized
+    - name: built static files are synchronized
+      tags: [ install, deploy ]
       synchronize:
         src: public/
         dest: "{{ webroot }}"
@@ -40,7 +46,3 @@
         group: no
       notify: restorecon
 
-  handlers:
-
-    - name: restorecon
-      shell: 'restorecon -R -v "{{ webroot }}"'

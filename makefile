@@ -1,60 +1,75 @@
-##>>> ansemjo/blog
-.DEFAULT_GOAL := dist
+# --------- configuration ----------
 
 # get most recent commit hash
 COMMIT := $(shell git describe --always --abbrev --dirty)
 
 # get theme name from config
 THEME := $(shell sed -n 's/theme = "\(.*\)"/\1/p' config.toml)
+THEMEMODULE := themes/$(THEME)/.git
 
-##  serve     : build and serve from memory
+# host to deploy on
+HOST := muliphein.semjonov.de
+
+# default target to run
+.DEFAULT_GOAL := build
+
+# --------- targets ----------
+
+##  serve     - build and serve from memory
 .PHONY: serve
-serve	: themes/$(THEME)/.git
+serve	: $(THEMEMODULE)
 	hugo serve --disableFastRender --bind 0.0.0.0
 
-##  build     : use hugo to build the site
-##  rebuild   : clean and build
-.PHONY: build rebuild
-build   : public/index.html ;
-rebuild : veryclean build ;
 
-##  new       : create a new post
-.PHONY: new
-new :
-	@bash -c "read -p 'Enter path: ' -ei 'post/$$(date +%Y)/newpost/index.md' path && hugo new \$$path"
+##* build     - use hugo to build the site
+.PHONY: build
+build : public/index.html
 
-##  deploy    : build and deploy the site
-.PHONY: deploy
-deploy : HOST := muliphein.semjonov.de
-deploy : rebuild
-	ansible-playbook -i $(HOST), -u root deploy.yml
-
-# run hugo to build public site
-public/index.html : themes/$(THEME)/.git $(shell find content/ -type f) config.*
+public/index.html : $(THEMEMODULE) $(shell find content/ -type f) config.*
 	hugo --ignoreCache
 
-# checkout theme submodules
 themes/%/.git :
-	git submodule update --init
+	git submodule update --init themes/$*
 
-##> dist      : create a compressed archive of built site
+
+##  new       - write a new blog post
+.PHONY: new
+new :
+	@read -p 'Enter path: ' -ei 'posts/$(shell date +%Y)/newpost' path && \
+	hugo new "$$path/index.md" && \
+	$$EDITOR "content/$$path/index.md";
+
+
+##  deploy    - build and deploy the site
+.PHONY: deploy
+deploy : clean build
+	ansible-playbook -i $(HOST), -u root -t deploy playbook.yml
+
+
+##  dist      - create a compressed archive of built site
 .PHONY: dist
-ARCHIVE := dist-$(COMMIT).tar.gz
+ARCHIVE := homepage-$(COMMIT).tar.gz
 dist : $(ARCHIVE)
-$(ARCHIVE) : public/index.html
+$(ARCHIVE) : clean build
 	tar czf $@ -C public/ .
 
-##  clean     : use git to clean untracked files and folders
+
+##  clean     - remove built public/ site
 .PHONY: clean
 clean :
-	git clean -fdx
+	rm -rf public/
 
-##  veryclean : clean and deinit all submodules (themes)
+##  veryclean - use git to clean files and deinit all submodules
 .PHONY: veryclean
 veryclean : clean
 	git submodule deinit --all --force
+	git clean -fdx
 
-##  help      : usage help
 .PHONY: help
 help :
+	@echo -e "\033[1mconfiguration:\033[0m"
+	@echo "  commit    = $(COMMIT)"
+	@echo "  theme     = $(THEME)"
+	@echo "  host      = $(HOST)"
+	@echo -e "\033[1mavailable targets:\033[0m"
 	@sed -n 's/^##//p' makefile
