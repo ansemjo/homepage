@@ -8,7 +8,7 @@ THEME := $(shell sed -n 's/theme = "\(.*\)"/\1/p' config.toml)
 THEMEMODULE := themes/$(THEME)/.git
 
 # host to deploy on
-HOST := muliphein.semjonov.de
+HOST := lenna.semjonov.de
 
 # default target to run
 .DEFAULT_GOAL := build
