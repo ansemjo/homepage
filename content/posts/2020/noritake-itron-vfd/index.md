@@ -41,7 +41,7 @@ the solder jumpers `J0..4` next to `CN1`: if they're all left open then you need
 picocom --baud 19200 --flow none --parity even /dev/ttyUSB0
 ```
 
-You can start typing right away and the display with write it out in its beautiful
+You can start typing right away and the display will write it out in its beautiful
 blue-green-ish glow.
 
 {{< hint info >}}
