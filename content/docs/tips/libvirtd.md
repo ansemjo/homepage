@@ -1,14 +1,15 @@
 ---
-title: libvirtd Networking
-weight: 50
+title: libvirtd
+weight: 10
 ---
 
-# libvirtd Networking
+# libvirtd
 
 
 ## SR-IOV Virtual Interfaces
 
-I've experimented with the SR-IOV functionality of my Supermicro X10SDV a little.
+I've experimented with the SR-IOV functionality of my Supermicro X10SDV's network
+interfaces a little.
 Virtual machines using these virtual function interfaces do not reach the same
 speeds between different virtual machines on the same hypervisor as is the case
 with `macvtap` networking. In return however, host to guest networking just works
@@ -78,3 +79,48 @@ ExecStop  = sh -c "echo  0 >/sys/class/net/%i/device/sriov_numvfs"
 
 This service can be required by `libvirtd.service` with an override, so the virtual
 functions are created before starting the virtual machine manager.
+
+
+
+## Shared Filesystems with `virtio-fs`
+
+After moving away from an ESXi hypervisor to a Linux box with KVM, I looked for
+possibilities of sharing parts of the host filesystem with the guest machines.
+[`virtio-fs`](https://virtio-fs.gitlab.io/) is a relatively new approach, which replaces
+shared folders based on the `9p` filesystem. Instead of using network filesystem
+semantics over a virtualized pipe, `virtio-fs` uses shared memory directly.
+
+In order to use it, you need very recent versions of QEMU and libvirt. Neither CentOS 8
+nor Ubuntu 20.04 provide sufficiently recent packages at the moment. However, there is
+a PPA for Ubuntu at [ppa:jacob/virtualisation](https://launchpad.net/~jacob/+archive/ubuntu/virtualisation).
+
+An upstream guide is [available on libvirt.org](https://libvirt.org/kbase/virtiofs.html).
+
+The XML snippet required in virt-manager for this new filesystem share looks like this:
+
+```xml
+<filesystem type="mount" accessmode="passthrough">
+  <driver type="virtiofs"/>
+  <source dir="/path/to/shared/directory"/>
+  <target dir="hostshare"/>
+</filesystem>
+```
+
+You also need to add a NUMA node for the shared memory region. I think there is a better /
+more automatic way. But this works for now:
+
+```xml
+<cpu mode="custom" match="exact" check="none">
+  <model fallback="forbid">qemu64</model>
+  <topology sockets="1" dies="1" cores="2" threads="1"/>
+  <numa>
+    <cell id="0" cpus="0-1" memory="2097152" unit="KiB" memAccess="shared"/>
+  </numa>
+</cpu>
+```
+
+Inside the virtual machine, you can mount the share with:
+
+```sh
+mount -t virtiofs hostshare /mnt
+```
