@@ -86,6 +86,42 @@ done
 
 ![](clockface.jpg)
 
+{{< expand "Second script: RAM display" >}}
+
+The second script I wrote displays the total / used / free RAM in MiB:
+
+```sh
+#!/usr/bin/env bash
+
+# setup serial line
+PORT="${PORT:-/dev/ttyUSB0}"
+picocom --quiet --baud 19200 --parity even --flow none --databits 8 --noreset --exit "$PORT"
+
+# software reset for clean slate
+echo -ne '\x1b\x49' >"$PORT"
+sleep 0.5
+
+# apply settings
+echo -ne '\x1b\x4c\xff' >"$PORT" # full brightness
+echo -ne '\x16'         >"$PORT" # disable cursor
+
+while true; do
+
+  # reset position and print labels
+  printf '\x0c%s' "RAM: total used free" >"$PORT"
+
+  # print current memory usage
+  cnt=1000
+  until [[ $cnt -le 0 ]]; do
+    printf '\x0c\x0aMiB  %5.5s %4.4s %4.4s' $(free --mebi | awk '/^Mem:/ { print $2, $3, $4 }') >"$PORT"
+    let cnt-=1
+    sleep 1
+  done
+  
+done
+```
+{{< /expand >}}
+
 Wasn't this simple? Note that there is a "Flickerless Write" instruction in the datasheet but
 I haven't figured out how to use it yet.
 
