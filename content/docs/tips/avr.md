@@ -96,6 +96,28 @@ upload_command = updiprog -d tiny41x -c $UPLOAD_PORT -b $UPLOAD_SPEED -e -w $SOU
 It should be trivial to adjust the board definition for other microcontrollers in the
 same family.
 
+### Alternative for Baremetal Support in PlatformIO
+
+Another alternative to creating a full board JSON is simply not specifying a board
+at all, apparently. I have successfully used this `platformio.ini` to program and flash
+an ATmega16U2 (that is the "USB-to-Serial" chip on an Arduino Uno R3 .. yes, you have
+*two* microcontrollers on that board):
+
+```ini
+[env:atmega16u2]
+platform = atmelavr
+board_build.mcu = atmega16u2
+board_build.f_cpu = 16000000UL
+board_upload.maximum_size = 16384
+board_upload.maximum_ram_size = 512
+
+upload_protocol = custom
+upload_flags =
+  -cusbtiny
+  -pm16u2
+upload_command = /usr/bin/avrdude $UPLOAD_FLAGS -U flash:w:$SOURCE:i
+```
+
 ## Flashing over ISP header
 
 Recently I had the need to program an Arduino that was not responding over USB,
