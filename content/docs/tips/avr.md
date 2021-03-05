@@ -58,7 +58,7 @@ int main(void) {
 In order to compile this for the `avrxmega3` target, you'll need to get a compatible compiler
 toolchain first. My version of `avr-gcc` did know about the target and recognized the
 `-mmcu=attiny412` argument – however compilation failed because support was missing in my
-copy of `avr-libc`. An [article by Omzlo](https://www.omzlo.com/articles/baremetal-programming-on-the-tinyavr-0-micro-controllers#software) ([archive](https://archive.is/XvvRh))
+copy of `avr-libc`. An [article by Omzlo](https://www.omzlo.com/articles/baremetal-programming-on-the-tinyavr-0-micro-controllers#software) ([archive](https://archive.vn/XvvRh))
 describes the entire process in a little more detail, including how to get the necessary device
 pack files from Microchip. Being an Arch Linux user, I simply installed
 [`avr-libc-avrxmega3-svn`](https://aur.archlinux.org/packages/avr-libc-avrxmega3-svn/), which

@@ -48,21 +48,21 @@ on VFD tubes. There's a few very beautiful examples where people built wristwatc
 
 Here's a list of interesting and educational links:
 
-* [JohnEngineer's ChronodeVFD](https://archive.is/ODOFR): a steampunk-esque wristwatch powered from a single 1.5V Alkaline battery ([flickr](https://www.flickr.com/photos/johngineer/15564850491/), [archive](https://archive.is/ODOFR))
+* [JohnEngineer's ChronodeVFD](https://archive.vn/ODOFR): a steampunk-esque wristwatch powered from a single 1.5V Alkaline battery ([flickr](https://www.flickr.com/photos/johngineer/15564850491/), [archive](https://archive.vn/ODOFR))
 
-* [VFD Watch Demystified](https://www.instructables.com/id/Vacuum-Fluorescent-Display-Watch/): a clone of the wristwatch above, driven by an ESP32, complete with schematics and code ([archive](https://archive.is/ojaD5))
+* [VFD Watch Demystified](https://www.instructables.com/id/Vacuum-Fluorescent-Display-Watch/): a clone of the wristwatch above, driven by an ESP32, complete with schematics and code ([archive](https://archive.vn/ojaD5))
 
-* [VFD Clock](http://vwlowen.co.uk/arduino/vfd/vfd-clock.htm): a desk clock design, where the filament is driven from a regulated H-bridge ([archive](https://archive.is/Xkr9G))
+* [VFD Clock](http://vwlowen.co.uk/arduino/vfd/vfd-clock.htm): a desk clock design, where the filament is driven from a regulated H-bridge ([archive](https://archive.vn/Xkr9G))
 
 * [Tiny IV-21 VFD Clock](https://hackaday.io/project/167749-tiny-iv-21-vfd-clock#j-discussions-title) uses a hovering actual tube VFD where the filament is powered directly with a voltage divider through a transistor
 
-* [Yet another clock design](http://kevinrye.net/index_files/vfd_clock_part3.php) by Kevin Rye ([archive](https://archive.is/C2UBq))
+* [Yet another clock design](http://kevinrye.net/index_files/vfd_clock_part3.php) by Kevin Rye ([archive](https://archive.vn/C2UBq))
 
-* [Noritake Itron VFD operation guide](https://www.noritake-elec.com/technology/general-technical-information/vfd-operation): contains extensive descriptions of how to drive the filament with center-tapped AC couplings ([archive](https://archive.is/BsdLR))
+* [Noritake Itron VFD operation guide](https://www.noritake-elec.com/technology/general-technical-information/vfd-operation): contains extensive descriptions of how to drive the filament with center-tapped AC couplings ([archive](https://archive.vn/BsdLR))
 
 * [A series of posts on idyl.io](https://idyl.io/category/vfd/) follows the design of VFD quasi-dot-matrix displays with several different PSU designs based on OpAmps and H-bridges
 
-* [EEVBlog user Rolo designs a universal VFD PSU](https://www.eevblog.com/forum/projects/showing-my-vfd-psu/) based on an LM4871 OpAmp ([archive, no images](https://archive.is/bkgaG))
+* [EEVBlog user Rolo designs a universal VFD PSU](https://www.eevblog.com/forum/projects/showing-my-vfd-psu/) based on an LM4871 OpAmp ([archive, no images](https://archive.vn/bkgaG))
 
 ## Filament AC Voltage
 
