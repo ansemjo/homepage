@@ -118,6 +118,13 @@ upload_flags =
 upload_command = /usr/bin/avrdude $UPLOAD_FLAGS -U flash:w:$SOURCE:i
 ```
 
+Note: if you're going to play with the ATmega16U2 on your Arduino UNO R3, I have
+[a firmware dump of mine](/assets/arduino_uno_r3_16u2.zip)
+if you need to restore its full functionality later. There may be quirks about
+the protected USB bootloader region. The original "combined" firmware can be found
+in your Arduino installation's firmware data:
+`~/.arduino15/packages/arduino/hardware/avr/1.8.1/firmwares/atmegaxxu2`
+
 ## Flashing over ISP header
 
 Recently I had the need to program an Arduino that was not responding over USB,
