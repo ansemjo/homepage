@@ -16,3 +16,6 @@ This page just contains a number of interesting links of various topics ...
 
 * [Generating ePub from LaTeX](https://minireference.com/blog/generating-epub-from-latex/)
   ([archive](https://archive.vn/BJpLm), [git](https://github.com/minireference/sample-book/blob/bdfdbed/fabfile.py))
+
+* [Deep dive in CORS: History, how it works, and best practices](https://ieftimov.com/post/deep-dive-cors-history-how-it-works-best-practices/)
+  ([archive](https://archive.vn/TuEB0))
