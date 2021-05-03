@@ -19,3 +19,6 @@ This page just contains a number of interesting links of various topics ...
 
 * [Deep dive in CORS: History, how it works, and best practices](https://ieftimov.com/post/deep-dive-cors-history-how-it-works-best-practices/)
   ([archive](https://archive.vn/TuEB0))
+
+* [Hosting SQLite databases on Github Pages](https://phiresky.github.io/blog/2021/hosting-sqlite-databases-on-github-pages/)
+  ([archive](https://archive.vn/gzJV8))
