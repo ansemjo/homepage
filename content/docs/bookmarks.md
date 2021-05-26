@@ -22,3 +22,9 @@ This page just contains a number of interesting links of various topics ...
 
 * [Hosting SQLite databases on Github Pages](https://phiresky.github.io/blog/2021/hosting-sqlite-databases-on-github-pages/)
   ([archive](https://archive.vn/gzJV8))
+
+* [Optar - OPTical ARchiver](http://ronja.twibright.com/optar/)
+  ([archive](https://archive.vn/eCzqJ))
+
+* [cyphar/paperbak](https://github.com/cyphar/paperback/)
+
