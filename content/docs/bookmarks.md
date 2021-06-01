@@ -28,3 +28,5 @@ This page just contains a number of interesting links of various topics ...
 
 * [cyphar/paperbak](https://github.com/cyphar/paperback/)
 
+* [Best Practices Around Production Ready Web Apps with Docker Compose](https://nickjanetakis.com/blog/best-practices-around-production-ready-web-apps-with-docker-compose)
+  ([archive](https://archive.vn/u86SN))
