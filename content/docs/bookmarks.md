@@ -30,3 +30,6 @@ This page just contains a number of interesting links of various topics ...
 
 * [Best Practices Around Production Ready Web Apps with Docker Compose](https://nickjanetakis.com/blog/best-practices-around-production-ready-web-apps-with-docker-compose)
   ([archive](https://archive.vn/u86SN))
+
+* [Functors and Monads For People Who Have Read Too Many "Tutorials"](http://www.jerf.org/iri/post/2958)
+  ([archive](https://archive.vn/o15iR))
