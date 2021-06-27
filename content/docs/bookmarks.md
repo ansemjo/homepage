@@ -33,3 +33,6 @@ This page just contains a number of interesting links of various topics ...
 
 * [Functors and Monads For People Who Have Read Too Many "Tutorials"](http://www.jerf.org/iri/post/2958)
   ([archive](https://archive.vn/o15iR))
+
+* [Avoiding complexity with systemd (protected directories, socket activation, loading credentials)](https://mgdm.net/weblog/systemd/)
+  ([archive](https://archive.vn/PBu5u))
