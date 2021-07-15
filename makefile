@@ -7,8 +7,9 @@ COMMIT := $(shell git describe --always --abbrev --dirty)
 THEME := $(shell sed -n 's/theme = "\(.*\)"/\1/p' config.toml)
 THEMEMODULE := themes/$(THEME)/.git
 
-# host to deploy on
-HOST := lenna.semjonov.de
+# target to deploy to
+DEPLOY := farouk.semjonov.de:/srv/www/semjonov.de/
+RSYNCARGS :=
 
 # default target to run
 .DEFAULT_GOAL := build
@@ -20,7 +21,6 @@ HOST := lenna.semjonov.de
 serve	: $(THEMEMODULE)
 	hugo serve --disableFastRender --bind 0.0.0.0
 
-
 ##* build     - use hugo to build the site
 .PHONY: build
 build : public/index.html
@@ -31,7 +31,6 @@ public/index.html : $(THEMEMODULE) $(shell find content/ -type f) config.*
 themes/%/.git :
 	git submodule update --init themes/$*
 
-
 ##  new       - write a new blog post
 .PHONY: new
 new :
@@ -39,12 +38,10 @@ new :
 	hugo new "$$path/index.md" && \
 	$$EDITOR "content/$$path/index.md";
 
-
 ##  deploy    - build and deploy the site
 .PHONY: deploy
 deploy : clean build
-	ansible-playbook -i $(HOST), -u root -t deploy playbook.yml
-
+	rsync --archive $(RSYNCARGS) --chown=root:root public/ $(DEPLOY)
 
 ##  dist      - create a compressed archive of built site
 .PHONY: dist
@@ -52,7 +49,6 @@ ARCHIVE := homepage-$(COMMIT).tar.gz
 dist : $(ARCHIVE)
 $(ARCHIVE) : clean build
 	tar czf $@ -C public/ .
-
 
 ##  clean     - remove built public/ site
 .PHONY: clean
@@ -70,6 +66,6 @@ help :
 	@echo -e "\033[1mconfiguration:\033[0m"
 	@echo "  commit    = $(COMMIT)"
 	@echo "  theme     = $(THEME)"
-	@echo "  host      = $(HOST)"
+	@echo "  deploy    = $(DEPLOY)"
 	@echo -e "\033[1mavailable targets:\033[0m"
 	@sed -n 's/^##//p' makefile
