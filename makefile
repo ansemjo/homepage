@@ -31,6 +31,14 @@ public/index.html : $(THEMEMODULE) $(shell find content/ -type f) config.*
 themes/%/.git :
 	git submodule update --init themes/$*
 
+# create a vendored theme archive
+.PHONY: vendor-theme
+vendor-theme : $(THEMEMODULE)
+	cd $</.. && git archive -o "../$$(printf "%s-r%s-g%s.zip" \
+		"$$(basename "$$PWD")" \
+		"$$(git rev-list --count HEAD)" \
+		"$$(git rev-parse --short HEAD)")" HEAD
+
 ##  new       - write a new blog post
 .PHONY: new
 new :
