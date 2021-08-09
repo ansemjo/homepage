@@ -86,7 +86,7 @@ done
 
 ![](clockface.jpg)
 
-{{< expand "Second script: RAM display" >}}
+{{< details "Second script: RAM display" >}}
 
 The second script I wrote displays the total / used / free RAM in MiB:
 
@@ -120,7 +120,7 @@ while true; do
   
 done
 ```
-{{< /expand >}}
+{{< /details >}}
 
 Wasn't this simple? Note that there is a "Flickerless Write" instruction in the datasheet but
 I haven't figured out how to use it yet.
