@@ -79,5 +79,8 @@ The built firmware will be in `build-qtpy_m0_haxpress/firmware.uf2` and can be u
 to the board just like you would with the official ones: a quick double-press of the
 reset switch and simply copy the file to the virtual disk that pops up.
 
+I [have attached][firmware] a built firmware with the above modification.
+
 [building]: https://github.com/adafruit/circuitpython/blob/main/BUILDING.md
 [repo]: https://github.com/adafruit/circuitpython/
+[firmware]: /assets/cpy-v1.9.4-9810-g6a76b6002-qtpy_m0_haxpress-W25Q128.uf2
