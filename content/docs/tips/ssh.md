@@ -54,7 +54,7 @@ ForwardAgent no
 
 Use one! Try [keychain](https://www.funtoo.org/Keychain) if you don't know which one.
 
-After some dabbling with the ssh-agent functionality of the GPG agent, I actually stick
+After some dabbling with the [ssh-agent functionality of the GPG agent]({{< relref "gnupg.md" >}}), I actually stick
 to the default one started with `gnome-keyring-daemon` right now. The GPG agent is annoying
 because it copies the key into your GPG homedir upon adding – effectively breaking the link
 to the original OpenSSH key file. Also there was some issue with handling certificates, if
