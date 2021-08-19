@@ -7,7 +7,7 @@ weight: 10
 
 ## Gitlab Runner in QEMU/KVM
 
-First [deploy CoreOS in a virtual machine](../rechenzentrum/docker-in-kvm.md).
+First [deploy CoreOS in a virtual machine]({{< relref "../homelab/docker-in-kvm.md" >}}).
 
 Then deploy the Gitlab Runner as a Docker container itself. Following the
 [documentation](https://docs.gitlab.com/runner/install/docker.html):
