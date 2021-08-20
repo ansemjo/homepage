@@ -1,13 +1,18 @@
 ---
-title: restic
+title: Restic
 weight: 10
 ---
 
-# restic
+# Restic
 
 These tips are assuming that you have your `RESTIC_REPOSITORY` and necessary API keys, e.g.
 `B2_ACCOUNT_{ID|KEY}`, set in your environment. This enables you to simply use `restic [command]`
 instead of specifying the repository with `-r <repo>` and entering the password interactively.
+
+{{< hint info >}}
+*\*pssht!\** I like using [borg]({{< relref "borg.md" >}}) a lot more. Too bad `borg` doesn't
+backup to object storage though. If that's important to you check out [kopia](https://github.com/kopia/kopia), too.
+{{< /hint >}}
 
 ## Restore a Single File
 
