@@ -4,17 +4,15 @@ title: Hello
 BookToC: no
 ---
 
-# Hello!
+# Hello
 
-I'm ansemjo. I am a student of Information Technology from Germany.
+My name is Anton.  
+I am a student of Information Technology from Germany.
 
-These are my pages, containing a [blog](/posts) and information on various topics in a *readthedocs*-like structure.
+These pages are my little piece of the internet.  
+They containin a [blog](/posts) and information on various
+[topics](/docs/tips) in a sort of a wiki structure.
 
-You can find me on [Twitter](https://twitter.com/ansemjo) and
-[GitHub](https://github.com/ansemjo) or you can send me an e-mail to hello@semjonov.de.
-
-## License
-
-Unless otherwise noted, the content on these pages is licensed under a
-[Creative Commons Attribution-ShareAlike](https://semjonov.de/license) license.
+Say hi on [Twitter](https://twitter.com/ansemjo) or
+[GitHub](https://github.com/ansemjo); or send me an email to hello@semjonov.de.
 
