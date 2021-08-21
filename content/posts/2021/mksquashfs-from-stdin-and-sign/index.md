@@ -57,12 +57,12 @@ At this point it is trivial to just sign the checksum file however you like befo
 
 In the end I wrote myself a small replacement script for `sfsimage` that did just this one thing: checksum and write whatever it receives on standard input into a new squashfs archive. Hence, I've called the result `squashpipe` and saved it [to my dotfiles](https://github.com/ansemjo/dotfiles/blob/master/bash/aliases.d/squashpipe.sh):
 
-    ... | ./squashpipe archive.sqsh
+    ... | squashpipe archive.sqsh
 
 The script handles `-n` to specify the filename inside the archive, `-m` to adjust the file mode and `-s` to optionally sign the checksum with a `signify` key as described above:
 
     signify -Gn -p ~/key.pub -s ~/key.sec
-    ... | ./squashpipe -s ~/key.sec archive.sqsh
+    ... | squashpipe -s ~/key.sec archive.sqsh
 
 The checksum contains a BSD-style tag that `signify` can verify directly. Mount the archive and verify the signature and checksum easily with:
 
