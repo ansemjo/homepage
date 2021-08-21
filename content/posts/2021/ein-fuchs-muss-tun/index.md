@@ -1,6 +1,7 @@
 ---
 title: "Ein Fuchs muss tun was ein Fuchs tun muss."
 date: 2021-02-18T17:01:19+01:00
+tags: diy
 ---
 
 This is just a simple post about some artwork I did as a present recently.
