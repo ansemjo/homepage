@@ -40,9 +40,9 @@ Preferably, you would do that without re-reading the entire disk image a second 
 Looking at `sfsimage` again, there is already an example of using "plain old `dd`" with `tee` and `md5sum` all in a single pipe. However, at this point the somewhat inflexible configuration and usage of `sudo` thorughout the script (it assumes that you want to image a block device after all ...) was annoying me and I wanted it simpler. So without much further ado, this is the simplified core in just a couple of lines:
 
     ssh root@vps.example.com dd if=/dev/sda |\
-      tee >(sha256sum | sed 's/-/disk.img/' >/tmp/checksum) |\
+      tee >(sha256sum | sed 's/-/disk.img/' >/tmp/disk.img.sha256) |\
       mksquashfs /tmp/emptydir archive.sqsh -comp zstd -p "disk.img f 644 0 0 cat" \
-    && mksquashfs /tmp/checksum archive.sqsh -quiet
+    && mksquashfs /tmp/disk.img.sha256 archive.sqsh -quiet
 
 It does add some overhead but I believe that is mostly due to `sha256sum` and `mksquashfs` contending for CPU cycles. Depending on your bandwidth you might also want to compress the stream remotely and decompress it again locally before archival; using the `-C` option of `ssh` is utterly useless though because it uses the same algorithm as `gzip` -- which actually made the transfer **slower** in my tests. Instead use `zstd`:
 
@@ -51,7 +51,7 @@ It does add some overhead but I believe that is mostly due to `sha256sum` and `m
 
 ## Signing the checksum
 
-At this point it is trivial to just sign the checksum file however you like before you append both the `checksum` and `checksum.sig` to the archive. I like `signify` as a lightweight alternative to GPG -- but you do you. Signify can't directly sign the disk image because it limits the length of the message that you can sign.
+At this point it is trivial to just sign the checksum file however you like before you append the `disk.img.sig` to the archive. I like `signify` as a lightweight alternative to GPG -- but you do you. Signify can't directly sign the disk image because it limits the length of the message that you can sign.
 
 ## Wrap it up
 
@@ -62,9 +62,9 @@ In the end I wrote myself a small replacement script for `sfsimage` that did jus
 The script handles `-n` to specify the filename inside the archive, `-m` to adjust the file mode and `-s` to optionally sign the checksum with a `signify` key as described above:
 
     signify -Gn -p ~/key.pub -s ~/key.sec
-    ... | squashpipe -s ~/key.sec archive.sqsh
+    ... | squashpipe -n data -s ~/key.sec archive.sqsh
 
 The checksum contains a BSD-style tag that `signify` can verify directly. Mount the archive and verify the signature and checksum easily with:
 
     mkdir mnt/ && squashfuse archive.sqsh mnt/ && mnt/
-    signify -Cx checksum.sig -p ~/key.pub
+    signify -Cx data.sig -p ~/key.pub
