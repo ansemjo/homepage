@@ -12,7 +12,7 @@ For a real example see [tinyssh-keyconvert@0.3.1...0.3.2](https://github.com/ans
 {{< /hint >}}
 
 Version information should be single-sourced if you ask me. I've described my thoughts
-in a [blog post]({{< ref "/posts/2018/git-version-string/index.md" >}}), which culminated
+in a [blog post]({{< relref "/posts/2018/git-version-string/index.md" >}}), which culminated
 in my [ansemjo/version.sh](https://github.com/ansemjo/version.sh) script.
 
 To solve this problem for Python packages:

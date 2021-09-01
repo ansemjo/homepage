@@ -114,5 +114,5 @@ Useful pointers:
 - [systemd.unit(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)
 
 {{< hint info >}}
-See [Systemd Decryption Target]({{< ref "systemd-decryption-target.md" >}}) for the finished result.
+See [Systemd Decryption Target]({{< relref "systemd-decryption-target.md" >}}) for the finished result.
 {{< /hint >}}
