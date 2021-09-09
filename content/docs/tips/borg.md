@@ -47,7 +47,7 @@ Next, forward this socket to the "client" machine which has the data you want to
 backup:
 
     ssh -R /run/borg.sock:/tmp/borg.sock vps.example.com
-    
+
 You probably won't be able to use `/run/borg.sock` when you're not running as root remotely;
 adjust accordingly.
 
@@ -71,7 +71,7 @@ the path to the repository on the server (as given above for `borg serve`).
 
     BORG_RSH="sh -c 'exec nc -U /run/borg.sock'" \
       borg list ssh://pullsock/path/to/repository
-      
+
 ### Automate it with environment variables
 
 If at this point you try the "all-in-one" command from the docs above, it won't work
@@ -98,4 +98,73 @@ ssh -o SendEnv="BORG_*" -R /run/borg.sock:/tmp/borg.sock vps.example.com \
   borg create ::{hostname}-{now} /path/to/data
 ```
 
-Putting everything together in a script is left as an exercise to the reader. :P
+### Example scripts
+
+These are example scripts combining all of the things above. Put `borgctl` on the remote machine somewhere, generate a new SSH identity locally and put its public key into `~/.ssh/authorized_keys` together with a "forced" command, as shown in the script. Then use `borgpull` locally.
+
+{{< tabs "scripts" >}}
+{{< tab "borgctl" >}}
+
+```
+#!/usr/bin/env bash
+set -eu
+
+# this file initiates the borg backup on the "far" side
+# e.g. put it in a ssh forced command like so:
+#  restrict,port-forwarding,command="/usr/local/bin/borgctl" ssh-ed25519 AAAAC3NzaC1lZD..... borgpull key
+echo "[$(date)] running borgctl on $(hostname)"
+
+# borg socket should be given
+# env: BORG_SOCKET
+BORG_SOCKET="${BORG_SOCKET:-/run/borg.sock}"
+if ! [[ -S $BORG_SOCKET ]]; then
+  echo "err: borg socket does not exist" >&2
+  exit 10
+else
+  # delete socket after we're done
+  trap "rm ${BORG_SOCKET@Q}" EXIT
+fi
+
+# repository path on remote should be given
+# env: BORG_REPOPATH
+if [[ -z ${BORG_REPOPATH+defined} ]] || ! [[ $BORG_REPOPATH =~ ^/ ]]; then
+  echo "err: absolute borg repository path required" >&2
+  exit 10
+fi
+
+# configure borg with environment variables
+export BORG_RSH="sh -c \"exec nc -U ${BORG_SOCKET@Q}\""
+export BORG_REPO="ssh://socket${BORG_REPOPATH}"
+export BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK="yes"
+export BORG_RELOCATED_REPO_ACCESS_IS_OK="yes"
+
+borg create --compression zstd --stats '::{hostname}-etc-{now}' /etc ;;
+```
+
+{{< /tab >}}
+{{< tab "borgpull" >}}
+
+```
+#!/usr/bin/env bash
+set -eu
+
+# repository to provide for targets
+export BORG_REPOPATH=/path/to/repository
+
+# start borg server on a socket
+export BORG_SOCKET=$(mktemp -u /tmp/borgpull-$(date +%s)-XXXXXXXX)
+socat \
+  UNIX-LISTEN:"${BORG_SOCKET}",umask=077,fork,unlink-close=1 \
+  EXEC:"borg serve --append-only --restrict-to-path ${BORG_REPOPATH@Q}" &
+trap "kill $! 2>/dev/null || true" EXIT
+
+# pull the backup from server
+timeout 30m ssh -T \
+  -o SendEnv=BORG_\* \
+  -R "$BORG_SOCKET:$BORG_SOCKET" \
+  -i ~/.ssh/id_borgpull \
+  vps.example.com
+```
+
+{{< /tab >}}
+{{< /tabs >}}
