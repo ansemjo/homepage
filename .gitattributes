@@ -1,3 +1,4 @@
-# exclude some files from language statistics
-# https://github.com/github/linguist#using-gitattributes
-content/assets/ linguist-vendored
+# exclude some files from language statistics, detect markdown
+# see: https://github.com/github/linguist
+content/assets/*    linguist-vendored
+*.md                linguist-detectable=true
