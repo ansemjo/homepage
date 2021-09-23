@@ -210,16 +210,37 @@ bootctl install
 Then copy the latest kernel and initramfs to the ESP:
 
 ```sh
-cp --dereference /boot/{vmlinuz,initrd.img,efi/}vi 
+cp --dereference /boot/{vmlinuz,initrd.img,efi/}
 ```
 
-You'll want to do that every time you update your kernel or something recreates your initramfs – ideally automatically with a hook. One of the guides suggests a script in `/etc/kernel/postinst.d/` but in my quick tests that did not work reliably. So I wrote a simple wrapper in `/usr/local/bin/update-initramfs`; but I'm sure there is a better way.
+You'll want to do that every time you update your kernel or something recreates your initramfs – ideally automatically with a hook. One of the guides suggests a script in `/etc/kernel/postinst.d/` but in my quick tests that did not work reliably. So I wrote a small script in `/boot/copykernels` to be called by an APT hook:
 
 ```bash
 #!/usr/bin/env bash
-/usr/sbin/update-initramfs "$@"; ret="$?"
-cp --dereference /boot/{vmlinuz,initrd.img} /boot/efi/
-exit "$ret"
+# copy updated kernel and initrd to efi system partition
+
+b=/boot
+e=/boot/efi
+
+# kernels: check versions
+for kern in vmlinuz{,.old}; do
+  if [[ $(file -Lb $b/$kern 2>/dev/null) != $(file -b $e/$kern 2>/dev/null) ]]; then
+    cp -fv --preserve $b/$kern $e/$kern
+  fi
+done
+
+# initrd: check creation time
+for init in initrd.img{,.old}; do
+  if [[ $b/$init -nt $e/$init ]]; then
+    cp -fv --preserve=mode,ownership $b/$init $e/$init
+  fi
+done
+```
+
+Write the following line to `/etc/apt/apt.conf.d/99-copykernels` in order to call this hook after every upgrade etc.:
+
+```
+DPkg::Post-Invoke { "/boot/copykernels"; }
 ```
 
 Finally, add a simple loader entry in `/boot/efi/loader/entries/ubuntu.conf`:
