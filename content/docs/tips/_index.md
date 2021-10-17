@@ -1,5 +1,5 @@
 ---
-title: Tips
+title: Wiki
 weight: 10
 
 bookToC: no
@@ -7,6 +7,7 @@ bookFlatSection: no
 bookCollapseSection: yes
 ---
 
-# Tips
+# Wiki
 
 Pick a topic from the menu!
+
