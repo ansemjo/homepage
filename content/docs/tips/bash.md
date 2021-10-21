@@ -5,6 +5,14 @@ weight: 10
 
 # bash
 
+## Move to script directory
+
+Sometimes you write a script that assumes that it executes from the directory that is stored in .. at least I do. Here's a handy line to put at the top of your script:
+
+```bash
+cd "$(dirname "${BASH_SOURCE[0]}")"
+```
+
 ## Check if a variable is defined
 
 The simplest approach of using `if [[ -n $var ]]; then ..` cannot detect if the
