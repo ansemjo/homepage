@@ -1,3 +1,4 @@
 public/
 resources/
 homepage-*.tar.gz
+.hugo_build.lock
