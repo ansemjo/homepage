@@ -118,3 +118,9 @@ When you reboot you should see systemd-boot's selection prompt instead of GRUB. 
 Do that and enable Secureboot now.
 
 If all went fine you should be able to normally boot your system now. Starting your machine via GRUB should fail though, as neither GRUB nor any of the kernels it tries to boot are signed.
+
+## `tpm2-totp`
+
+This section is mostly TODO because I still need to write up my current setup. But since I seem to forget [which PCRs](https://wiki.archlinux.org/title/Trusted_Platform_Module#Accessing_PCR_registers) to use, I'll write it down:
+
+    tpm2-totp reseal -p 0,1,2,3,5,7,8 -P $password
