@@ -36,3 +36,6 @@ This page just contains a number of interesting links of various topics ...
 
 * [Avoiding complexity with systemd (protected directories, socket activation, loading credentials)](https://mgdm.net/weblog/systemd/)
   ([archive](https://archive.vn/PBu5u))
+
+* [Running a Debugger over USB-C plugs using the Debug Accessory Mode](https://mobile.twitter.com/alvaroprieto/status/1495860045728395278)
+  ([archive](https://archive.vn/LXHXA))
