@@ -228,9 +228,12 @@ Looking from the top, the pins on the Adafruit board are used like this:
 ╰──────────────────╯
 ```
 
-The pins are all nicely in one row, so you can easily craft a custom cable, too.
+The pins are all nicely in one row, so you can easily craft a custom cable, too. I also
+created a small "expander" for the FT232H, which adds headers for AVR ICSP, 8-SOIC flash
+clip cables and a 1.27 pitch JTAG connector. Check it out
+[on GitHub: ansemjo/ftdi-expander](https://github.com/ansemjo/ftdi-expander).
 
-![](/assets/ft232h.png)
+![](/assets/ft232h.jpg)
 
 The `avrdude` config was first described on [helix.air.net.au][helix] and is now integrated in the
 systemwide config as programmer `UM232H`:
@@ -277,6 +280,27 @@ programmer parent "arduino-ft232r"
   id         = "ft232r";
   desc       = "Sparkfun FT232R breakout bit-banging";
 ;
+```
+
+#### Note about the new Revision with USB-C
+
+There's a newer revision of the Adafruit FT232H, which has a USB-C receptacle and Qwiic connector.
+This board also has a switch to enable the I2C mode by connecting `D1` and `D2` together!
+
+Make sure this switch is **OFF** when you're trying to flash your Arduino. Otherwise you will
+only get constant `0x535353` bytes back! This tripped me up because it was neither random nor
+constant ones or zeroes, until I remembered that switch. Doh'!
+
+```
+$ avrdude -c ft232h -p attiny85
+
+avrdude: AVR device initialized and ready to accept instructions
+
+Reading | ################################################## | 100% 0.00s
+
+avrdude: Device signature = 0x535353
+avrdude: Expected signature for ATtiny85 is 1E 93 0B
+         Double check chip, or use -F to override this check.
 ```
 
 ### Raspberry Pi
