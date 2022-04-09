@@ -47,7 +47,7 @@ apt update && apt install -y debootstrap arch-install-scripts
 
 ## Partitioning
 
-I will be rather brief in this part because I assume you know how you want to partition your disk if you're follow this guide. For this example I used two partitions: one small EFI system partition and an encrypted Linux partition.
+I will be rather brief in this part because I assume you know how you want to partition your disk if you're following this guide. For this example I used two partitions: one small EFI system partition and an encrypted Linux partition.
 
 ```
 gdisk /dev/vda
