@@ -13,6 +13,6 @@ These pages are my little piece of the internet.
 They containin a [blog](/posts) and information on various
 [topics](/docs/tips) in a sort of a wiki structure.
 
-Say hi on [Twitter](https://twitter.com/ansemjo) or
+Say hi on [Twitter](https://twitter.com/ansemjo), <a rel="me" href="https://chaos.social/@ansemjo">Mastodon</a> or
 [GitHub](https://github.com/ansemjo); or send me an email to hello@semjonov.de.
 
