@@ -52,3 +52,73 @@ ExecStart=/opt/bin/qemu-ga
 [Install]
 WantedBy=multi-user.target
 ```
+
+## `fcos` Installer
+
+I wrote a little script to create new Fedora CoreOS based virtual machines while
+playing around with it. I'm pubishing it here before cleaning up some unused files:
+
+```bash
+#!/usr/bin/env bash
+
+# helpers
+err() { echo "err: $1" >&2; }
+required() { if [[ -z $1 ]]; then err "$2 required"; exit 1; fi; }
+usage() { cat <<USAGE
+usage: $ fcos-install [-args] [extra]
+  -n name     : machine name
+  -c cpus     : number of vcpu cores
+  -m memory   : memory in MiB
+  -N netname  : use network name
+  -d disk     : size of disk in GiB
+  -D          : download latest iso
+USAGE
+}
+
+# default config
+VCPUS="2"
+MEMORY="2048"
+NETWORK="vf-eno4"
+DISKSIZE="24"
+DOWNLOAD="false"
+
+# commandline parser
+while getopts ":n:c:m:N:d:Dh" OPTION; do
+  case "$OPTION" in
+    # invalid cases
+   \?) err "invalid option: $OPTARG"; exit 1;;
+    :) err "invalid option: $OPTARG requires an argument"; exit 1;;
+    h) usage; exit 0;;
+    # arguments
+    n) MACHINE="$OPTARG";;
+    c) VCPUS="$OPTARG";;
+    m) MEMORY="$OPTARG";;
+    N) NETWORK="$OPTARG";;
+    d) DISKSIZE="$OPTARG";;
+    D) DOWNLOAD="true";;
+  esac
+done
+shift "$((OPTIND-1))"
+
+# check required values
+required "$MACHINE" "machine name"
+required "$VCPUS" "number of cpu cores"
+required "$MEMORY" "amount of memory"
+required "$NETWORK" "network name"
+required "$DISKSIZE" "disk size"
+
+# download and use latest available iso
+if [[ $DOWNLOAD = true ]]; then
+  podman run --privileged --pull=always --rm \
+    -v /var/lib/libvirt/boot:/data -w /data \
+    quay.io/coreos/coreos-installer:release -- download -f iso
+fi
+ISO=$(ls /var/lib/libvirt/boot/fedora-coreos-*-live.x86_64.iso | sort -rV | head -1)
+
+# run virt-install
+virt-install --name="$MACHINE" --os-variant="fedora31" \
+  --vcpus="$VCPUS" --memory="$MEMORY" --memorybacking="hugepages=on" \
+  --network="network=$NETWORK" --graphics="none" --disk="size=$DISKSIZE" \
+  --location="$ISO,kernel=/images/pxeboot/vmlinuz,initrd=/images/pxeboot/initrd.img" \
+  --extra-args="initrd=/images/pxeboot/initrd.img,/images/ignition.img mitigations=auto,nosmt systemd.unified_cgroup_hierarchy=0 coreos.liveiso=$(basename "${ISO%%-live.x86_64.iso}") ignition.firstboot ignition.platform.id=qemu console=tty0 console=ttyS0,115200n8"
+```
