@@ -17,6 +17,10 @@ Assume that you have a decently powerful server, which hosts a number of applica
 
 ### Start the container
 
+{{< hint info >}}
+This sections shows how to use the official `traefik` container image. [Below, I also show how to use the binary release directly.](#alternative-use-the-binary)
+{{< /hint >}}
+
 In order to be able to proxy ports of applications running directly on the host, you need to either run the `traefik` binary directly or use the container image with `host` networking. I chose the latter with `podman`:
 
 ```bash
@@ -176,3 +180,81 @@ tls:
 
 ```
 
+### Alternative: Use the Binary
+
+Alternatively to the container image used above, you can also [download the binary from GitHub](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-binary-distribution) and use a hardened Systemd service file to start traefik.
+
+The following script can be placed in `/usr/local/bin/update-traefik` to download and extract the latest `traefik` binary from GitHub:
+
+```bash
+#!/usr/bin/env bash
+set -eu
+set -x
+
+# download latest binary from github
+cd /usr/local/bin
+url=$(curl -sH "Accept: application/vnd.github.v3+json" \
+  "https://api.github.com/repos/traefik/traefik/releases/latest" \
+  | jq -r .assets[].browser_download_url \
+  | grep -E 'linux_amd64\.tar\.gz$')
+curl -#RL -O "$url"
+tar="$(basename "$url")"; bin="${tar%.tar.gz}";
+trap "rm -f \"${tar}\"" EXIT
+
+# extract from archive
+tar xf "$tar" traefik \
+  --no-same-owner \
+  --transform "s/traefik/$bin/"
+
+# replace symlink
+ln -sf "$bin" traefik
+```
+
+It can then be used with a Systemd service file like this one:
+
+```ini
+[Unit]
+# https://github.com/traefik/traefik/blob/master/contrib/systemd/traefik.service
+Description=Traefik - The Cloud Native Application Proxy
+Documentation=https://doc.traefik.io/traefik/
+After=network.target
+AssertFileIsExecutable=/usr/local/bin/traefik
+AssertPathExists=/etc/traefik/traefik.yml
+
+[Service]
+Type=notify
+Restart=always
+WatchdogSec=1s
+ExecStart=/usr/local/bin/traefik --configFile=/etc/traefik/traefik.yml
+WorkingDirectory=/etc/traefik
+
+Environment=HETZNER_API_KEY_FILE=/etc/traefik/hetzner-token
+
+# lock down system access
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateDevices=yes
+DevicePolicy=closed
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+MemoryDenyWriteExecute=yes
+LockPersonality=yes
+
+# hide some directories
+PrivateMounts=yes
+InaccessiblePaths=/srv
+
+# allow writing of acme.json
+ReadWritePaths=/etc/traefik/acme.json
+
+[Install]
+WantedBy=multi-user.target
+```
+
+In my experience, I am more likely to download a new binary and restart a service than I am to pull a new tag and recreate the container. With all the hardening knobs in the service file above, the isolation should be almost as good as a container anyway.
