@@ -124,3 +124,27 @@ Inside the virtual machine, you can mount the share with:
 ```sh
 mount -t virtiofs hostshare /mnt
 ```
+
+## Creating a UEFI VM with SecureBoot enabled
+
+In addition to the standard packages required for hypervisors on Ubuntu (`qemu-kvm`, `libvirt-daemon-system`, `libvirt-clients`, `virtinst`) you'll also need the `ovmf` firmware and `swtpm` to emulate a software TPM.
+
+I like to use `virt-manager` locally over SSH to create a virtual machine. Just click through the dialogs until you're at the final step and then check "Customise configuration before install". Changing to UEFI later is a little more painful and you don't get to have SecureBoot without UEFI anyway.
+
+In **Overview**, select the `OVMF_CODE_4M.ms.fd` firmware. Apply and check in the XML that the `<loader>` node has an attribute `secure="yes"` and that `<smm state="on">` appears in the `<features>` list.
+
+**Add Hardware** and select an emulated TPM device with version 2.0. A directory will be created in `/var/lib/libvirtd/swtpm`.
+
+You might try to enter the UEFI settings and check under `▶ Device Settings ▶ Secure Boot Configuration` that it is set to `Enabled`. When booting a Linux OS you should either see a message like `EFI stub: UEFI Secure Boot is enabled` or you can search the kernel log for messages: `dmesg | grep secureboot`.
+
+```
+root@ubuntu-server:/# dmesg | grep secureboot
+[    0.000000] secureboot: Secure boot enabled
+[    0.005094] secureboot: Secure boot enabled
+root@ubuntu-server:/# dmesg | grep tpm
+[    0.652356] tpm_tis MSFT0101:00: 2.0 TPM (device-id 0x1, rev-id 1)
+```
+
+### Convert a Windows VM
+
+If you first [convert your Windows harddisk to GPT using `MBR2GPT.EXE`](https://docs.microsoft.com/windows/deployment/mbr-to-gpt), you should also be able to change the firmware in an existing virtual machine using a configuration similar to the above. You'll just need to edit the XML directly because `virt-manager` does not let you use the dropdown menu after a machine is installed.
