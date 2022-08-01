@@ -6,8 +6,7 @@ weight: 10
 # CoreOS
 
 {{< hint danger >}}
-[CoreOS is deprecated.](https://coreos.com/os/eol/) I've played with its successor
-Fedora CoreOS but I'm not sure how easily these tips translate to it.
+The original [CoreOS is deprecated](https://coreos.com/os/eol/).
 {{< /hint >}}
 
 ## QEMU Guest Agent
@@ -52,6 +51,77 @@ ExecStart=/opt/bin/qemu-ga
 [Install]
 WantedBy=multi-user.target
 ```
+
+## Simple Jumphost Ignition with Autologin
+
+I've used the following Butane config when installing a Fedora CoreOS machine as
+a simple, auto-updating jumphost:
+
+```yaml
+variant: fcos
+version: 1.4.0
+
+# set authorized ssh keys
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 ...
+    - name: jump
+      ssh_authorized_keys:
+        - ssh-ed25519 ...
+
+storage:
+  files:
+
+    # set a hostname
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: |
+          jumphost
+
+    # configure autoupdater settings
+    - path: /etc/zincati/config.d/55-updates-strategy.toml
+      mode: 0644
+      contents:
+        inline: |
+          [updates]
+          strategy = "periodic"
+          [[updates.periodic.window]]
+          days = [ "Sat", "Sun" ]
+          start_time = "22:00"
+          length_minutes = 120
+
+systemd:
+  units:
+
+    # autologin on graphical console
+    - name: getty@tty1.service
+      dropins:
+        - name: autologin-core.conf
+          contents: |
+            [Service]
+            ExecStart=
+            ExecStart=-/sbin/agetty --autologin core --noclear %I $TERM
+
+    # autologin on serial console
+    - name: serial-getty@ttyS0.service
+      dropins:
+        - name: autologin-core.conf
+          contents: |
+            [Service]
+            ExecStart=
+            ExecStart=-/sbin/agetty --autologin core --noclear %I $TERM
+```
+
+Then I used the given container to convert this config into an Ignition file:
+
+```
+docker run --rm -i quay.io/coreos/butane:release \
+  --pretty --strict < config.bu > config.ign
+```
+
 
 ## `fcos` Installer
 
