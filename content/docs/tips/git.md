@@ -136,3 +136,26 @@ exec git push --quiet "mirror" &
 ```
 
 Now, every time you push to your local repository this script is executed and the repository will be mirrored.
+
+## Sign Commits with SSH Keys
+
+*See [Caleb Hearth's](https://calebhearth.com/) [Signing Git Commits with Your SSH Key](https://calebhearth.com/sign-git-with-ssh).*
+
+The *tl;dr* is that you need to configure `gpg.format` to `ssh` and set `user.signingKey` to your SSH public key. Ideally, the key should be available in an SSH agent.
+
+For verification, you need to create a file of the format `<userid> <pubkey>` and set its path in `gpg.ssh.allowedSignersFile`. You can use multiple comma-separated emails or an asterisk for the `userid`.
+
+In  the snippet below, I commented the `commit.gpgSign` key, because you can also sign each individual commit with `git commit -S ...` instead of just always signing everything.
+
+```ini
+[commit]
+#  gpgSign = true
+[gpg]
+  format = ssh
+[gpg.ssh]
+  allowedSignersFile = ~/.ssh/git-trusted-keys
+[user]
+  signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2Cxtc/CfWaSu4ybLqs3DTc9r0nEbyRS310fMqxYRZB
+
+```
+
