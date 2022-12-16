@@ -81,7 +81,7 @@ one piece. You can escape that with `printf '%q'` or `${cmd@Q}` if you like.
 Instead – and if you want to pass an encryption password you should do this anyway –
 I propose to put everything in environment variables locally and forward them properly
 with SSH. This requires that the `sshd` server on the "client" accepts the variables,
-so adjust `AcceptEnv` accordingly:
+so adjust `AcceptEnv` in `/etc/ssh/sshd_config` accordingly (and don't forget to reload the service):
 
     # Allow client to pass certain environment variables
     AcceptEnv LANG LC_* BORG_*
@@ -101,6 +101,10 @@ ssh -o SendEnv="BORG_*" -R /run/borg.sock:/tmp/borg.sock vps.example.com \
 ### Example scripts
 
 These are example scripts combining all of the things above. Put `borgctl` on the remote machine somewhere, generate a new SSH identity locally and put its public key into `~/.ssh/authorized_keys` together with a "forced" command, as shown in the script. Then use `borgpull` locally.
+
+{{< hint info >}}
+These scripts rely on forwarding environment variables. See the previous section on how to configure `AcceptEnv`!
+{{< /hint >}}
 
 {{< tabs "scripts" >}}
 {{< tab "borgctl" >}}
