@@ -166,3 +166,17 @@ spec:
 
 </details>
 
+## Internal DNS resolution
+
+I often have some applications in Kubernetes deployments, that need to access some internal services "behind" my firewall. These internal domains usually have a "split-brain" configuration, where I buy a domain, create stubs in the provider's public nameserver and then point all machines to a DNS server within the network, which actually knows how to resolve the names to RFC 1918 private addresses.
+
+Probably due to [k3s #4087](https://github.com/k3s-io/k3s/issues/4087#issuecomment-928438828) my K3s node does not pick up the host's `/etc/resolv.conf` (as it contains IPv6 addresses). In this situation, there are two solutions:
+
+* Either create a separate `resolv.conf` file for use with K3s – e.g. at `/etc/resolv-k3s.conf` – and point the installer to it with `--resolv-conf <file>`, as suggested in the above issue comment.
+
+* Or configure the CoreDNS configuration file and add a [`forward` rule](https://coredns.io/plugins/forward/):
+  * The configuration file should be located at `/var/lib/rancher/k3s/server/manifests/coredns.yaml`
+  * Look for the `coredns` `ConfigMap` and add a line like `forward anrz.de. 10.0.0.1` in the `.:53 { ... }` block.
+  * Restart CoreDNS with `kubectl rollout restart -n kube-system deployment coredns`.
+
+You should probably use the first option, since it is stable between K3s updates. I had to reapply the second solution today after I ran an update.
