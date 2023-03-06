@@ -5,7 +5,7 @@ weight: 10
 
 # traefik
 
-For a long time I juggled with all sorts of virtualized homelab networks, when in the end all that I wanted was to selfhost a few services in my network with proper TLS. In the beginning there was FreeIPA with its `certmonger`. Then I switched to a simple OpenSSL CA with long-lived certificates. Later `mkcert` made this a lot easier. The last experiment used StepCA to host an ACME CA internally .... Sure, I learned a lot but *whyyy?*
+For a long time I juggled with all sorts of virtualized homelab networks, when in the end all that I wanted was to host a few services in my network with proper TLS. In the beginning there was FreeIPA with its `certmonger`. Then I switched to a simple OpenSSL CA with long-lived certificates. Later `mkcert` made this a lot easier. The last experiment used StepCA to host an ACME CA internally .... Sure, I learned a lot but *whyyy?*
 
 `traefik` may be a cloud-native technology, which "automatically discovers your infrastructure" when used with Kubernetes / Docker / etc. However, for my purposes it is simply a very handy reverse-proxy with very powerful builtin ACME providers.
 
@@ -258,3 +258,90 @@ WantedBy=multi-user.target
 ```
 
 In my experience, I am more likely to download a new binary and restart a service than I am to pull a new tag and recreate the container. With all the hardening knobs in the service file above, the isolation should be almost as good as a container anyway.
+
+## traefik with automatic discovery
+
+Above, I used `traefik` in a `podman` container and as such it made no sense to use the automatic discovery feature, since there was no compatible Docker socket *to discover the containers with*. Recently, I've had reason to set up a host which uses Docker to host the containers and so I wanted to adapt the above configuration with automatic discovery.
+
+I planned to use `docker-compose` to deploy the applications on this host, so it made sense to deploy `traefik` itself with a `docker-compose.yml` file aswell. Since the complete configuration can also be done in environment variables, this single file contains almost all the information required to run the service. Only a single mounted volume is required to the ACME storage (and in my case the Hetzner token). Without much further ado, here's my file.
+
+{{< hint danger >}}
+
+**Access to the Docker socket**
+
+Mounting the Docker socket directly, like I did here, [is a security concern](https://doc.traefik.io/traefik/providers/docker/#docker-api-access). There are a few examples on how to use [Tecnativa/docker-socket-proxy](https://github.com/Tecnativa/docker-socket-proxy) to filter the API requests and only allow read-only access. In my first few attempts I couldn't make this work reliably with `host` networking though. If you don't need to forward applications that run on the host directly, you should definitely consider this though.
+
+{{< /hint >}}
+
+```yaml
+version: "3"
+services:
+
+  # https://doc.traefik.io/traefik/reference/static-configuration/env/
+  traefik:
+    container_name: traefik
+    image: traefik:2.9
+    restart: always
+    network_mode: host
+    volumes:
+      - ./acmedata:/data # store certificates and mount token
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+
+      # disable telemetry
+      TRAEFIK_GLOBAL_CHECKNEWVERSION: false
+      TRAEFIK_GLOBAL_SENDANONYMOUSUSAGE: false
+
+      # be more verbose
+      TRAEFIK_LOG_LEVEL: INFO # or DEBUG
+
+      # disable the dashboard
+      TRAEFIK_API_DASHBOARD: false
+      TRAEFIK_API_INSECURE: false
+
+      # define http entrypoints
+      TRAEFIK_ENTRYPOINTS_http_ADDRESS: ":80"
+      TRAEFIK_ENTRYPOINTS_https_ADDRESS: ":443"
+      TRAEFIK_ENTRYPOINTS_https_HTTP_TLS_CERTRESOLVER: hetzner
+
+      # redirect http to https
+      TRAEFIK_ENTRYPOINTS_http_HTTP_REDIRECTIONS_ENTRYPOINT_TO: https
+      TRAEFIK_ENTRYPOINTS_http_HTTP_REDIRECTIONS_ENTRYPOINT_SCHEME: https
+      TRAEFIK_ENTRYPOINTS_http_HTTP_REDIRECTIONS_ENTRYPOINT_PERMANENT: false
+
+      # use the docker provider
+      TRAEFIK_PROVIDERS_DOCKER: true
+      TRAEFIK_PROVIDERS_DOCKER_EXPOSEDBYDEFAULT: false
+      TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE: "Host(`{{ or (index .Labels \"de.anrz.hostname\") (normalize .Name) }}.anrz.de`)"
+
+      # hetzner certificateresolver for tls
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner: true
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_STORAGE: /data/acme.json
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_EMAIL: webmaster@example.com
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_KEYTYPE: EC384
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_DNSCHALLENGE: true
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_DNSCHALLENGE_PROVIDER: hetzner
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_DNSCHALLENGE_DELAYBEFORECHECK: 5
+      TRAEFIK_CERTIFICATESRESOLVERS_hetzner_ACME_DNSCHALLENGE_DISABLEPROPAGATIONCHECK: true
+      HETZNER_API_KEY_FILE: /data/hetznertoken
+
+```
+
+I added an interesting bit in the default rule for Docker containers, which looks for a label `de.anrz.hostname` on the container and uses it for the default hostname rule. With traefik deployed like this, you can start containers with exposed ports and two short annotations and have them show up with a valid certificate in a few short seconds. This example uses the `nginxdemos/hello` image:
+
+```yaml
+version: "3"
+services:
+
+  hello:
+    image: nginxdemos/hello
+    labels:
+      traefik.enable: true
+      de.anrz.hostname: hello
+```
+
+{{< hint info >}}
+
+This image uses an `EXPOSE 80` statement in its Dockerfile, hence you don't even need to specify the port that traefik should listen on.
+
+{{< /hint >}}
