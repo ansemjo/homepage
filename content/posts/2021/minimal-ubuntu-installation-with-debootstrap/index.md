@@ -12,8 +12,8 @@ There may be another guide coming soon on how to *convert* an existing Ubuntu Se
 
 In writing this, I was partly following these two guides:
 
-* [shinycore/debootstrap-focal-plasma.md](https://gist.github.com/shinycore/d02f3968e02b7f548c68c039277912aa)
-* [the-empire.systems/minimal-ubuntu-install](https://the-empire.systems/minimal-ubuntu-install)
+* [shinycore/debootstrap-focal-plasma.md](https://gist.github.com/shinycore/d02f3968e02b7f548c68c039277912aa) ([archived](https://web.archive.org/web/20210512095028/https://gist.github.com/shinycore/d02f3968e02b7f548c68c039277912aa))
+* [the-empire.systems/minimal-ubuntu-install](https://the-empire.systems/minimal-ubuntu-install) ([archived](https://web.archive.org/web/20221126151702/https://the-empire.systems/minimal-ubuntu-install))
 
 
 
