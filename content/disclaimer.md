@@ -13,9 +13,8 @@ Betreiber der Seite und außerdem verantwortlich für den Inhalt ist:
 Anton Semjonov
 webmaster /ät semjonov.de
 
-Rodigallee 55 b
-22043 Hamburg
-Germany
+Hohler Weg 28
+D-21481 Lauenburg/Elbe
 ```
 
 ## Haftungsausschluss (Disclaimer)
