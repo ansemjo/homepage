@@ -20,7 +20,8 @@ and optical character recognition on the commandline for now.
 
 ### Scanbot
 
-The scanner app is [Scanbot](https://scanbot.io/). It is touted as the preferred
+The scanner app I use is [SwiftScan](https://swiftscan.app/) (using the
+[Scanbot SDK](https://scanbot.io/)). It is touted as the preferred
 document scanner app in various articles and has a couple of advantages compared
 to its competitors. Among them are a nice and clean interface which is important
 for a quick workflow and automatic uploading to a cloud storage of your choice,
