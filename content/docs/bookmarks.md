@@ -39,3 +39,6 @@ This page just contains a number of interesting links of various topics ...
 
 * [Running a Debugger over USB-C plugs using the Debug Accessory Mode](https://mobile.twitter.com/alvaroprieto/status/1495860045728395278)
   ([archive](https://archive.vn/LXHXA))
+
+* [Unlocking secret ThinkPad functionality for emulating USB devices (xDCI) - Andrey Konovalov](https://xairy.io/articles/thinkpad-xdci)
+  ([archive](https://archive.is/j15xu); [for Dell XPS](https://gist.github.com/shinyquagsire23/ab6f7c0f9b6514b6b54d69b9a57646be))
