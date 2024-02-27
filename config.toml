@@ -13,6 +13,7 @@ rssLimit = 20
   BookTheme = "light"
   BookToC = true
   BookRepo = "https://github.com/ansemjo/homepage"
+  BookSection = "docs/"
   BookEditPath = "edit/main"
   BookDateFormat = "January 2, 2006"
   BookSearch = true

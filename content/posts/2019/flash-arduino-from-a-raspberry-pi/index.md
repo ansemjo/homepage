@@ -28,7 +28,7 @@ preinstalled on Linux. I've documented the cabling and configuation [in my wiki]
 
 [sparkfun]: https://www.sparkfun.com/products/12731 "SparkFun USB to Serial Breakout - FT232RL"
 [adafruit]: https://www.adafruit.com/product/2264 "Adafruit FT232H Breakout - General Purpose USB to GPIO+SPI+I2C"
-[wiki]: {{< ref "/docs/tips/avr.md" >}} "Arduino Tips - ansemjo's docs"
+[wiki]: {{< ref "/docs/wiki/avr.md" >}} "Arduino Tips - ansemjo's docs"
 
 ## GPIOs on a Raspberry Pi
 
