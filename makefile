@@ -20,7 +20,7 @@ new :
 	$$EDITOR "content/$$path/index.md";
 
 ##  deploy    - build and deploy the site
-DEPLOY 		:= farouk.semjonov.de:/srv/www/semjonov.de/
+DEPLOY 		:= nemik.semjonov.de:/var/www/semjonov.de/
 RSYNCARGS :=
 .PHONY: deploy
 deploy : clean build
