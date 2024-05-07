@@ -42,3 +42,5 @@ This page just contains a number of interesting links of various topics ...
 
 * [Unlocking secret ThinkPad functionality for emulating USB devices (xDCI) - Andrey Konovalov](https://xairy.io/articles/thinkpad-xdci)
   ([archive](https://archive.is/j15xu); [for Dell XPS](https://gist.github.com/shinyquagsire23/ab6f7c0f9b6514b6b54d69b9a57646be))
+
+* [Heat Death of the Internet - Gregory Bennett](https://www.takahe.org.nz/heat-death-of-the-internet/) ([archive](https://archive.fo/iHaSQ)) *poetry*
