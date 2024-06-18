@@ -14,5 +14,5 @@ They containin a [blog](/posts) and information on various
 [topics](/docs/wiki) in a sort of a wiki structure.
 
 Say hi on <a rel="me" href="https://chaos.social/@ansemjo">Mastodon</a>,
-[GitHub](https://github.com/ansemjo) or send me an email to hello@semjonov.de.
+[GitHub](https://github.com/ansemjo) or send me an email to hello24@semjonov.de.
 
