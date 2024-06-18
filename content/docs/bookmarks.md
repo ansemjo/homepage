@@ -44,3 +44,5 @@ This page just contains a number of interesting links of various topics ...
   ([archive](https://archive.is/j15xu); [for Dell XPS](https://gist.github.com/shinyquagsire23/ab6f7c0f9b6514b6b54d69b9a57646be))
 
 * [Heat Death of the Internet - Gregory Bennett](https://www.takahe.org.nz/heat-death-of-the-internet/) ([archive](https://archive.fo/iHaSQ)) *poetry*
+
+* [systemd, 10 years later: a historical and technical retrospective](https://blog.darknedgy.net/technology/2020/05/02/0/) ([archive](https://archive.is/o8OUD))
