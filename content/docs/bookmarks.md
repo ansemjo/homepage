@@ -46,3 +46,5 @@ This page just contains a number of interesting links of various topics ...
 * [Heat Death of the Internet - Gregory Bennett](https://www.takahe.org.nz/heat-death-of-the-internet/) ([archive](https://archive.fo/iHaSQ)) *poetry*
 
 * [systemd, 10 years later: a historical and technical retrospective](https://blog.darknedgy.net/technology/2020/05/02/0/) ([archive](https://archive.is/o8OUD))
+
+* [Extreme Pi Boot Optimization by @manawyrm](https://kittenlabs.de/blog/2024/09/01/extreme-pi-boot-optimization/) ([archive](https://archive.is/raEOv)), also links to the [USB-SD-Mux](https://shop.linux-automation.com/usb_sd_mux-D02-R01-V02-C00) which looks very useful
