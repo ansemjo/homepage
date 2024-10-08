@@ -50,3 +50,5 @@ This page just contains a number of interesting links of various topics ...
 * [Extreme Pi Boot Optimization by @manawyrm](https://kittenlabs.de/blog/2024/09/01/extreme-pi-boot-optimization/) ([archive](https://archive.is/raEOv)), also links to the [USB-SD-Mux](https://shop.linux-automation.com/usb_sd_mux-D02-R01-V02-C00) which looks very useful
 
 * [Some Notes on Adversarial Attacks on LLMs](https://cybernetist.com/2024/09/23/some-notes-on-adversarial-attacks-on-llms/) ([archive](https://archive.is/NzuG2))
+
+* [Reducing SD Card Wear on a Raspberry Pi or Armbian Device](https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html) ([archive](https://archive.is/qkIRE))
