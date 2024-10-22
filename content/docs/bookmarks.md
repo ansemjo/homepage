@@ -52,3 +52,5 @@ This page just contains a number of interesting links of various topics ...
 * [Some Notes on Adversarial Attacks on LLMs](https://cybernetist.com/2024/09/23/some-notes-on-adversarial-attacks-on-llms/) ([archive](https://archive.is/NzuG2))
 
 * [Reducing SD Card Wear on a Raspberry Pi or Armbian Device](https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html) ([archive](https://archive.is/qkIRE))
+
+* [PID 1 Bash script for Docker containers explained line by line](https://sirikon.me/posts/0009-pid-1-bash-script-docker-container.html) ([archive](https://archive.is/FsFA2))
