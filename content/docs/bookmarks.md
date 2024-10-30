@@ -54,3 +54,5 @@ This page just contains a number of interesting links of various topics ...
 * [Reducing SD Card Wear on a Raspberry Pi or Armbian Device](https://www.dzombak.com/blog/2021/11/Reducing-SD-Card-Wear-on-a-Raspberry-Pi-or-Armbian-Device.html) ([archive](https://archive.is/qkIRE))
 
 * [PID 1 Bash script for Docker containers explained line by line](https://sirikon.me/posts/0009-pid-1-bash-script-docker-container.html) ([archive](https://archive.is/FsFA2))
+
+* [Australia/Lord_Howe is the weirdest timezone](https://ssoready.com/blog/engineering/truths-programmers-timezones/) ([archive](https://archive.is/xymgu))
